@@ -1,0 +1,27 @@
+ul, li {
+    border: none;
+    background-color: #FFCB30;
+}
+
+h5 {
+    font-weight: 600;
+}
+
+h6 {
+    font-weight: 400;
+}
+
+fa-icon {
+    font-size: 2rem;
+}
+
+.container-fluid {
+    padding: 2%;
+}
+
+@media screen and (max-width: 1000px) {
+    .container-fluid {
+        padding: 4% 1%;
+    }
+    
+}

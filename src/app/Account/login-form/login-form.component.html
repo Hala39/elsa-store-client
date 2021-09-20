@@ -1,0 +1,20 @@
+<form class="p-3"  [formGroup]="loginForm">
+    <span class="d-flex justify-content-center">
+      <span class="p-input-icon-right mt-2">
+        <i class="pi pi-user"></i>
+        <input type="text" placeholder="Email" formControlName="email" pInputText />
+      </span>
+    </span>
+    <span class="d-flex justify-content-center">
+    <div class="mt-2">
+      <span class="p-input-icon-right mt-2">
+          <i *ngIf="hide" class="pi pi-eye-slash" (click)="switch()"></i>
+          <i *ngIf="!hide" class="pi pi-eye" (click)="switch()"></i>
+        <input [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password" pInputText />
+      </span>
+    </div>
+    </span>
+    <span class="d-flex justify-content-center mt-3">
+      <p-button class="mt-2" (click)="login()">Submit</p-button>  
+    </span>
+</form>

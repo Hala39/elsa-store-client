@@ -1,0 +1,87 @@
+img {
+    width: 100%;
+    text-align: center;
+}
+
+.color-option {
+    width: 80px;
+    height: 80px;
+}
+
+.options {
+    padding-left: 5%;
+}
+
+.d-grid {
+    margin-left: 15%;
+    width: 70%;
+}
+
+.btn.outlined {
+    background-color: white;
+    color: #9933FF;
+    border: 1px solid #9933FF;
+    box-shadow: none;
+}
+
+.btn.heavy {
+    background-color: #9933FF;
+    color: white;
+    border: 1px solid #9933FF;
+    box-shadow: none;
+
+}
+
+
+:host ::ng-deep {
+    
+    // dropdown
+    .p-dropdown:not(.p-disabled).p-focus {
+        box-shadow: none;
+        border-color: gray;
+    }
+
+    .p-dropdown:focus {
+        border: 1px solid gray;
+    }
+
+    .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+        background-color: #9933FF;
+    }
+
+    // input
+    .p-inputnumber-buttons-stacked .p-inputnumber-input {
+        width: 50px;
+        box-shadow: none;
+    }
+
+    .p-inputnumber-buttons-stacked .p-inputnumber-input:focus {
+        border: 1px solid gray;
+    }
+
+    .p-inputnumber-buttons-stacked .p-button.p-inputnumber-button-up, .p-inputnumber-buttons-stacked .p-button.p-inputnumber-button-down {
+        box-shadow: none;
+        border: white;
+    }
+
+    .p-inputnumber-buttons-stacked .p-button.p-inputnumber-button-up {
+        background-color: #00D99F;
+    }
+
+    .p-inputnumber-buttons-stacked .p-button.p-inputnumber-button-down {
+        background-color: #FFCB30;
+
+    }
+
+} 
+
+@media screen and (max-width: 1000px) {
+    .container-fluid {
+        padding-right: 0 !important;
+        padding-left: 0% !important;
+    }
+}
+
+//yellow: #FFCB30
+//red: #FF001B
+//green: #00D99F

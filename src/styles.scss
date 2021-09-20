@@ -1,0 +1,60 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css"; //bootstrap
+
+@font-face {
+    font-family: "ZenTokyoZoo";
+    src: local("ZenTokyoZoo"), url(./assets/fonts/ZenTokyoZoo-Regular.ttf) format("truetype");
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, “Segoe UI”, Roboto, Helvetica, Arial, sans-serif, “Apple Color Emoji”, “Segoe UI Emoji”, “Segoe UI Symbol”;
+    padding-left: 5%;
+    padding-right: 5%;
+
+}
+
+.bk-yellow {
+    background-color:  #FFCB30;
+}
+
+.bk-purple {
+    background-color: #9933FF;
+    color: white;
+}
+
+.bk-light-purple {
+    background-color: #AB5EF8;
+    color: white;
+}
+
+.purple {
+    color: #9933FF;
+}
+
+.light-purple {
+    color:#AB5EF8;
+}
+
+.red {
+    color: #FF001B;
+}
+
+.green {
+    color: #00D99F;
+}
+
+.yellow {
+    color: #FFCB30;
+}
+
+.empty-image {
+    width: 300px;
+    height: 300px;
+}
+
+@media screen and (max-width: 500px) {
+    body {
+        padding-left: 0%;
+        padding-right: 0%;
+    }
+}

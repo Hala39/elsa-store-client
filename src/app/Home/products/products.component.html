@@ -1,0 +1,38 @@
+<div class="container-fluid mt-2 bk-purple">
+    <p-megaMenu [model]="items"></p-megaMenu>
+</div>
+
+<div *ngIf="( products$ | async ) as products">
+    <div class="mt-5">
+        <p-dataView #dv [value]="products" 
+        [paginator]="true" 
+        [rows]="4" 
+        [totalRecords]="10"
+        filterBy="name"
+        (onPageChange)="paginate(pagination.currentPage)"
+        layout="grid">
+            <ng-template let-product pTemplate="gridItem">
+                <div class="p-col-12 p-sm-6 p-md-4 p-lg-3" style="padding: 0% !important;">
+                    <div class="product-grid-item card m-0">
+                        <div class="product-grid-item-top">
+                            <div>
+                                <i class="pi pi-tag product-category-icon"></i>
+                                <span class="product-category">{{product.category.name}}</span>
+                            </div>
+                        </div>
+                        <div class="product-grid-item-content">
+                            <img [src]="product.mainImageUrl" [alt]="product.name" class="product-image">
+                        </div>
+                        <div class="product-grid-item-bottom">
+                            <span class="product-price">{{product.price | currency }}</span>
+                            <p-button icon="pi pi-shopping-cart"
+                            styleClass="p-button-sm p-button-help"
+                            routerLink="/product/{{product.id}}">
+                        </p-button>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </p-dataView>
+    </div>
+</div>

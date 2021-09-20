@@ -1,0 +1,86 @@
+
+
+<div *ngIf="(basket$ | async) === null">
+    <div class="container-fluid pt-5">
+        <div class="row d-flex justify-content-center">
+            <img src="assets/images/misc/cart.png" alt="empty cart" class="empty-image">
+        </div>
+        <div class="row pt-5">
+            <h1 style="text-align: center;">Basket Is Empty!</h1>
+        </div>
+    </div>
+</div>
+<div *ngIf="basket$ | async">
+    <div style="border-bottom: none;">
+        <p-toolbar class="card">
+            <ng-template pTemplate="left">
+               
+            </ng-template>
+            <ng-template pTemplate="right">
+                <button pButton pRipple class="p-button-help p-mr-2 p-d-inline-block"
+                    *ngIf="selectedItems.length > 0"
+                    (click)="order()">
+                    Order selected items for {{ this.getTotal(this.selectedItems) | currency }}
+                </button>
+                <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" 
+                (click)="deleteSelectedItems()" 
+                    [disabled]="!selectedItems || !selectedItems.length"></button>
+            </ng-template>
+        </p-toolbar>
+    </div>
+    
+    <div class="card" *ngIf="(basket$ | async ) as basket ">
+        <p-table #dt [value]="basket" [rows]="10" [paginator]="true"
+            [(selection)]="selectedItems" [rowHover]="true" dataKey="id"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+            <ng-template pTemplate="header">
+                <tr class="t-header">
+                    <th style="width: 3rem">
+                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th>Image</th>
+                    <th pSortableColumn="price">Price <p-sortIcon field="price" class="hidden"></p-sortIcon></th>
+                    <th pSortableColumn="quantity">Quantity <p-sortIcon field="quantity" class="hidden"></p-sortIcon></th>
+                    <th pSortableColumn="quantity">Total <p-sortIcon field="total"></p-sortIcon></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item>
+                <tr>
+                    <td>
+                        <p-tableCheckbox [value]="item"></p-tableCheckbox>
+                    </td>
+                    <td style="padding-left: 0% !important;">
+                        <div style="position: relative;">
+                            <div class="row">
+                                <img [src]="item.pictureUrl" alt="item.name" class="item-image">
+                            </div>
+                            <div class="row mt-1" style="text-align: left; font-size: smaller;">
+                                {{item.sizeName}}, {{item.colorName}}
+                            </div>
+                        </div>
+                    </td>
+                    <td class="price">{{item.price | currency:'USD'}}</td>
+                    <td class="">
+                        <i pButton pRipple type="button" icon="pi pi-minus" class="p-button-rounded p-button-warning" (click)="decrementItemQuantity(item)"
+                        style="width: 30px; height: 30px;"></i>
+                        {{item.quantity}}
+                        <i pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded p-button-warning"  (click)="incrementItemQuantity(item)"
+                        style="width: 30px; height: 30px;"></i>
+                    </td>
+                    <td>{{item.quantity * item.price | currency}}</td>
+                    <td class="buttons">
+                        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteItem(item)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+                <div class="p-d-flex p-ai-center p-jc-between">
+                    In total there are {{items ? items.length : 0 }} items.
+                </div>
+            </ng-template>
+        </p-table>
+    </div>
+    
+    
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+</div>

@@ -1,0 +1,174 @@
+<div class="card p-3 my-5" [ngSwitch]="activeIndex">
+    <p-steps [model]="items" [readonly]="true" [(activeIndex)]="activeIndex"></p-steps>
+
+    <div *ngSwitchCase="PageNames.first">
+    <p-card class="p-p-3">
+        <ng-template pTemplate="title">
+            Personal Information
+        </ng-template>
+        <ng-template pTemplate="subtitle">
+            Enter your personal information
+        </ng-template>
+        <ng-template pTemplate="content" [formGroup]="personalInfoForm">
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <input formControlName="firstName"  type="text" required class="form-control" placeholder="First Name"
+                    [ngClass]="{'warn': (firstName.invalid && submitted) || (firstName.touched && firstName.invalid)}"> 
+                    <small *ngIf="(firstName.invalid && submitted) || (firstName.touched && firstName.invalid)" class="p-error">This field is required.</small>
+                    <small *ngIf="(firstName.invalid && submitted) || (firstName.touched && firstName.hasError('pattern'))" class="p-error">Only letters are allowed.</small>
+                </div>
+                <div class="col-md-6 col-12">
+                    <input formControlName="lastName" type="text" required class="form-control" placeholder="Last Name"
+                    [ngClass]="{'warn': (lastName.invalid && submitted) || (lastName.touched && lastName.invalid)}"> 
+                    <small class="p-error" *ngIf="(lastName.invalid && submitted )|| (lastName.touched && lastName.invalid)">This field is required.</small>
+                    <small class="p-error" *ngIf="(lastName.invalid && submitted )|| (lastName.touched && lastName.hasError('pattern'))">Only letters are allowed.</small>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6 col-12">
+                    <input formControlName="contactEmail" type="text" required class="form-control" placeholder="Contact Email"
+                    [ngClass]="{'warn': (contactEmail.invalid && submitted) || (contactEmail.touched && contactEmail.invalid)}"> 
+                    <small class="p-error" *ngIf="(contactEmail.invalid && submitted )|| (contactEmail.touched && contactEmail.hasError('required'))">This filed is required.</small>
+                    <small class="p-error" *ngIf="(contactEmail.invalid && contactEmail.touched && contactEmail.hasError('email'))">Please enter a valid email.</small>
+                </div>
+                <div class="col-md-6 col-12">
+                    <input formControlName="contactPhone" type="text" required class="form-control" placeholder="Contact Phone"
+                    [ngClass]="{'warn': (contactPhone.invalid && submitted) || (contactPhone.touched && contactPhone.invalid)}"> 
+                    <small class="p-error" *ngIf="(contactPhone.invalid && submitted )|| (contactPhone.touched && contactPhone.invalid)">This field is required.</small>
+                    <small class="p-error" *ngIf="(contactPhone.invalid && submitted )|| (contactPhone.touched && contactPhone.hasError('pattern'))">Only digits are allowed.</small>
+                    <small class="p-error" *ngIf="(contactPhone.invalid && submitted )|| (contactPhone.touched && contactPhone.hasError('minlength' ))">Your phone number is 8 characters.</small>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <div class="p-grid p-nogutter p-justify-end">
+                <p-button [disabled]="personalInfoForm.invalid" label="Next" icon="pi pi-angle-right" iconPos="right" (click)="changeIndex()"></p-button>
+            </div>
+        </ng-template>
+    </p-card>
+    </div>
+
+    <div *ngSwitchCase="PageNames.second">
+        <p-card class="p-p-3">
+            <ng-template pTemplate="title">
+                Delivery Address
+            </ng-template>
+            <ng-template pTemplate="subtitle">
+                Enter your address information
+            </ng-template>
+            <ng-template pTemplate="content"  [formGroup]="addressForm">
+                <div class="row">
+                    <div class="col-6 col-md-4 pt-2">
+                        <p-dropdown [options]="governorates" optionLabel="name" formControlName="selectedGovernorate" optionDisabled="inactive"
+                        (onChange)="selectGovernorate(selectedGovernorate.value)"></p-dropdown>
+                        <small *ngIf="(selectedGovernorate.invalid && submitted) || (selectedGovernorate.touched && selectedGovernorate.invalid)" class="p-error">
+                            This field is required.
+                        </small>
+                    </div>
+                    <div class="col-6 col-md-4 pt-2">
+                        <p-dropdown [options]="districts" optionLabel="name" formControlName="selectedDistrict" optionDisabled="inactive"
+                        (onChange)="selectDistrict(selectedDistrict.value)"></p-dropdown>
+                        <small *ngIf="(selectedDistrict.invalid && submitted) || (selectedDistrict.touched && selectedDistrict.invalid)" class="p-error">
+                            This field is required.
+                        </small>
+                    </div>
+                    <div class="col-4 col-md-4 pt-2">
+                        <input type="text" class="form-control" placeholder="Zip Code">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-6 col-md-6 pt-2">
+                        <input type="text" class="form-control" formControlName="firstLine" placeholder="Address - First Line">
+                        <small *ngIf="(firstLine.invalid && submitted) || (firstLine.touched && firstLine.invalid)" class="p-error">
+                            This field is required.
+                        </small>
+                    </div>
+                    <div class="col-6 col-md-6 pt-2">
+                        <input type="text" class="form-control" formControlName="secondLine" placeholder="Address - Second Line">
+                        <small *ngIf="(secondLine.invalid && submitted) || (secondLine.touched && secondLine.invalid)" class="p-error">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <div class="p-grid p-nogutter p-justify-between">
+                    <p-button label="Back" icon="pi pi-angle-left"></p-button>
+                    <p-button [disabled]="personalInfoForm.invalid" label="Next" icon="pi pi-angle-right" iconPos="right" (click)="changeIndex()"></p-button>
+                </div>
+            </ng-template>
+        </p-card>
+    </div>
+
+    <div *ngSwitchCase="PageNames.third">
+        <p-card class="p-p-3">
+            <ng-template pTemplate="content">
+                <h4 style="text-align: center;">Oups! This feature is not available right now!</h4>
+                <br>
+                <p  style="text-align: center;">Please proceed to the next step!</p>
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <div class="p-grid p-nogutter p-justify-between">
+                    <p-button label="Back" icon="pi pi-angle-left"></p-button>
+                    <p-button [disabled]="personalInfoForm.invalid" label="Next" icon="pi pi-angle-right" iconPos="right" (click)="changeIndex()"></p-button>
+                </div>
+            </ng-template>
+        </p-card>
+    </div>
+
+    <div *ngSwitchCase="PageNames.forth">
+        <p-card>
+            <ng-template pTemplate="title">
+                Confirmation
+            </ng-template>
+            <ng-template pTemplate="subtitle">
+                Please re-check your info
+            </ng-template>
+            <ng-template pTemplate="content">
+                <h6>Personal Info</h6>
+                Full Name: {{firstName.value}} {{lastName.value}}
+                <br>
+                Contact Email: {{contactEmail.value}}
+                <br>
+                Contact Phone: {{contactPhone.value}}
+                <hr>
+                <h6>Address</h6>
+                Region {{selectedDistrict.value.name}}, {{selectedGovernorate.value.name}} 
+                <br>
+                First Line: {{firstLine.value}}
+                <br>
+                Second Line: {{secondLine.value}}
+                <hr>
+                <h6 *ngIf="orderItems">Order</h6>
+                <div *ngFor="let item of orderItems">
+                    <div class="row">
+                        <div class="col-4 col-md-4">
+                            <img [src]="item.pictureUrl" class="item-image" alt="">
+                        </div>
+                        <div class="col-8 col-md-6">
+                            <b>Name:</b> {{item.productName}}
+                            <br>
+                            <b>Color:</b> {{item.colorName}} 
+                            <br>
+                            <b>Size:</b> {{item.sizeName}}
+                            <br>
+                            <b>Quantity:</b> {{item.quantity}}
+                            <br>
+                            <b>Subtotal:</b> {{item.price * item.quantity | currency }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row pr-2">
+                        <b>Total:</b> {{ total | currency}}
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <div class="p-grid p-nogutter p-justify-between">
+                    <p-button label="Back" icon="pi pi-angle-left"></p-button>
+                    <p-button label="Complete" icon="pi pi-angle-right" iconPos="right" styleClass="p-button-success" (click)="placeOrder()"></p-button>
+                </div>
+            </ng-template>
+        </p-card>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+
+:host ::ng-deep {
+    .p-steps .p-steps-item:before {
+        border: none;
+    }
+
+    .p-dropdown {
+        width: 100%;
+    }
+
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: gray;
+}
+
+.warn {
+    border-color: #dc3545;
+}
+
+.item-image {
+    width: 150px;
+    height: 150px;
+}

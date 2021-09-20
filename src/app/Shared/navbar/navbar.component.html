@@ -1,0 +1,75 @@
+<nav class="navbar navbar-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" [routerLink]="['/']">
+          <img src="assets/images/brand/ELSA.png" alt="ELSA">
+      </a>
+      <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/']">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Shop</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Contact</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link">About</a>
+        </li>
+      </ul>
+      <ul class="nav justify-content-end">
+        <li class="nav-item">
+          <a class="nav-link">
+            <button pButton pRipple type="button" icon="pi pi-user" class="p-button-rounded p-button-info p-button-text" (click)="op.toggle($event)"></button>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <button pButton pRipple type="button" icon="pi pi-search" class="p-button-rounded p-button-success p-button-text"
+            (click)="searchSidebar = true"></button>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <button pButton pRipple type="button" icon="pi pi-shopping-cart" class="p-button-rounded  p-button-danger p-button-text" *ngIf="(isUserLoggedIn | async)"
+            [routerLink]="['/cart']"></button>
+          </a>
+        </li>
+        <i class="pi pi-bars" style="font-size: 2rem" (click)="menuSidebar = true"></i>
+      </ul>
+    </div>
+</nav>
+
+<!-- search -->
+<p-sidebar [(visible)]="searchSidebar" [fullScreen]="true" [baseZIndex]="10000">
+    <input type="text" class="form-control search-sidebar" placeholder="Type here .." [(ngModel)]="searchString" (keyup.enter)="search(searchString)">
+</p-sidebar>
+
+<!-- menu -->
+<p-sidebar  [dismissible]="true"  [closeOnEscape]="true" [(visible)]="menuSidebar" [fullScreen]="false" position="right" [baseZIndex]="10000"> 
+  <div class="p-col-12 p-md-4 mb-2">
+    <div class="p-inputgroup">
+        <span class="p-inputgroup-addon search-addon"><i class="pi pi-search"></i></span>
+        <input type="text" class="form-control search-addon" pInputText placeholder="Search here ..">         
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <p-menu [model]="items"></p-menu>
+    </div>
+  </div>
+</p-sidebar>
+
+<!-- account -->
+<p-overlayPanel #op  [dismissable]="true" [showCloseIcon]="true">
+  <ng-template pTemplate >
+    <p-tabView [(activeIndex)]="activeIndex">
+      <p-tabPanel header="SIGNUP">
+        <app-register-form></app-register-form>
+      </p-tabPanel>
+      <p-tabPanel header="LOGIN">
+        <app-login-form></app-login-form>
+      </p-tabPanel>
+    </p-tabView>
+  </ng-template>
+</p-overlayPanel>

@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "name": "Governorate",
+        "inactive": true
+    },
+    {
+        "id": 1,
+        "name": "Akkar"
+    },
+    {
+        "id": 2,
+        "name": "Baalbek-Hermel"
+    },
+    {
+        "id": 3,
+        "name": "Beirut"
+    },
+    {
+        "id": 4,
+        "name": "Beqaa"
+    },
+    {
+        "id": 5,
+        "name": "Keserwan-Jbeil"
+    },
+    {
+        "id": 6,
+        "name": "Mount-Lebanon"
+    },
+    {
+        "id": 7,
+        "name": "Nabatie"
+    },
+    {
+        "id": 8,
+        "name": "North"
+    },
+    {
+        "id": 9,
+        "name": "South"
+    }
+
+]

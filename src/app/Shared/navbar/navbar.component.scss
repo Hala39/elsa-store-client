@@ -1,0 +1,52 @@
+.nav-link {
+    font-family: "ZenTokyoZoo";
+    color: black !important;
+    font-size: x-large;
+    font-weight: 500;
+}
+
+.search-sidebar {
+    border: none;
+    box-shadow: none;
+    font-size: 2rem;
+}
+
+.pi-bars {
+    color:#9933FF;
+    display: none;
+}
+
+.search-addon {
+    background-color: white;
+    border: none;
+    box-shadow: none;
+}
+
+@media screen and (max-width: 1000px) {
+    .nav-item {
+        display: none;
+    }
+
+    .pi-bars {
+        display: block;
+    }
+}
+
+:host ::ng-deep .tabview-custom {
+    i, span {
+        vertical-align: middle;
+    }
+
+    span {
+        margin: 0 .5rem;
+    }
+}
+
+:host ::ng-deep .p-button {
+    margin-right: .25rem;
+}
+
+:host ::ng-deep .p-tabview p {
+    line-height: 1.5;
+    margin: 0;
+}

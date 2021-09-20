@@ -1,0 +1,110 @@
+:host ::ng-deep .p-dialog .product-image {
+    width: 150px;
+    margin: 0 auto 2rem auto;
+    display: block;
+
+}
+
+.card {
+    border-radius: 0%;
+}
+
+.item-image {
+    width: 130px;
+    height: 130px;
+    padding-left: 0% !important;
+}
+
+:host ::ng-deep {
+
+    .p-toolbar {
+        background-color: white;
+        border: none;
+    }
+    // dropdown
+    .p-dropdown:not(.p-disabled).p-focus {
+        box-shadow: none;
+        border-color: gray;
+    }
+
+    .p-dropdown:focus {
+        border: 1px solid gray;
+    }
+
+    .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+        background-color: #9933FF;
+    }
+
+    // input
+    .p-inputnumber-buttons-stacked .p-inputnumber-input {
+        width: 50px;
+        box-shadow: none;
+    }
+
+    .p-inputnumber-buttons-stacked .p-button.p-inputnumber-button-up, .p-inputnumber-buttons-stacked .p-button.p-inputnumber-button-down {
+        border: 1px solid gray;
+    }
+
+    .p-inputnumber-buttons-stacked .p-button.p-inputnumber-button-up {
+        background-color: #00D99F;
+    }
+
+    .p-inputnumber-buttons-stacked .p-button.p-button.p-inputnumber-button-up:focus {
+        border: 1px solid gray;
+    }
+
+    .p-inputnumber-buttons-stacked .p-button.p-inputnumber-button-down {
+        background-color: #FFCB30;
+
+    }
+
+    .p-inputtext:enabled:focus {
+        box-shadow: none;
+        border-color: gray;
+    }
+
+    .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
+        background-color: #AB5EF8;
+        background: #AB5EF8;
+        border-color: #AB5EF8;
+
+    }
+
+    .p-checkbox .p-checkbox-box.p-highlight {
+        background-color: #AB5EF8;
+        background: #AB5EF8;
+        border-color: #AB5EF8;
+    }
+
+    .table-header {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+}
+
+    .hidden {
+        display: none;
+    }
+
+    .product-image {
+        width: 50px;
+        height: 50px;
+    }
+
+    .badge {
+        position: relative;
+        font-size: 10px;
+        right: 10%;
+    }
+
+
+@media screen and (max-width: 323px) {
+    .t-header {
+        display: none;
+    }
+
+    .buttons {
+        max-width: 10%;
+    }
+}

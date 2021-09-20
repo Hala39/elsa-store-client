@@ -1,0 +1,20 @@
+<div class="container-fluid p-5" style="margin-bottom: 30%;">
+  <p-tabView [(activeIndex)]="activeIndex">
+    <p-tabPanel header="Pending">
+        <div *ngIf="pendingOrders.length > 0">
+            <app-order-card [orders]="pendingOrders" [pending]="true"></app-order-card>
+        </div>
+        <div *ngIf="pendingOrders.length === 0">
+          You do not have orders yet!
+        </div>
+    </p-tabPanel>
+    <p-tabPanel header="Recents">
+        <div *ngIf="recentOrders.length > 0">
+          <app-order-card [orders]="recentOrders"  [pending]="false"></app-order-card>
+        </div>
+        <div *ngIf="recentOrders.length === 0">
+          You do not have orders yet!
+        </div>
+    </p-tabPanel>
+</p-tabView>
+</div>

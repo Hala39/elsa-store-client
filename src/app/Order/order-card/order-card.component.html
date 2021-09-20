@@ -1,0 +1,60 @@
+<p-card>
+    <ng-template pTemplate="content" *ngIf="!pending">
+        <div class="p-grid p-nogutter p-justify-end">
+            <p-button label="Clear Recent Orders" styleClass="p-button-warning" (click)="clearRecentOrders()"></p-button>
+        </div>
+    </ng-template>
+</p-card>
+<p-card  *ngFor="let order of orders">
+    <ng-template pTemplate="content">
+        <h6>Personal Info</h6>
+        Full Name: {{order.personalInfo.firstName}} {{order.personalInfo.lastName}}
+        <br>
+        Contact Email: {{order.personalInfo.contactEmail}}
+        <br>
+        Contact Phone: {{order.personalInfo.contactPhone}}
+        <hr>
+        <h6>Address</h6>
+        Region {{order.address.district.name}}, {{order.address.governorate.name}} 
+        <br>
+        First Line: {{order.address.firstLine}}
+        <br>
+        Second Line: {{order.address.secondLine}}
+        <hr>
+        <h6>Items</h6>
+        <div *ngFor="let item of order.items">
+            <div class="row">
+                <div class="col-4 col-md-4">
+                    <img [src]="item.pictureUrl" class="item-image" alt="">
+                </div>
+                <div class="col-8 col-md-6">
+                    <b>Name:</b> {{item.productName}}
+                    <br>
+                    <b>Color:</b> {{item.colorName}} 
+                    <br>
+                    <b>Size:</b> {{item.sizeName}}
+                    <br>
+                    <b>Quantity:</b> {{item.quantity}}
+                    <br>
+                    <b>Price:</b> {{item.price}}
+                    <br>
+                    <b>Subtotal:</b> {{item.price * item.quantity | currency }}
+                    <br>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-4 col-md-4"></div>
+            <div class="col-8 col-md-6">
+                <h6>Final Cost</h6>
+                <b>Total:</b> {{order.total | currency}}
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer"  *ngIf="pending">
+        <div class="p-grid p-nogutter p-justify-end">
+            <p-button label="Confirm Order" styleClass="p-button-warning" (click)="confirmOrder(order.id)"></p-button>
+        </div>
+    </ng-template>
+</p-card>

@@ -1,0 +1,20 @@
+<form class="p-3" [formGroup]="signupForm">
+    <span class="d-flex justify-content-center">
+      <span class="p-input-icon-right mt-2">
+        <i class="pi pi-user"></i>
+        <input type="text" placeholder="Name" formControlName="name" pInputText />
+      </span>
+    </span>
+    <span class="d-flex justify-content-center">
+      <span class="p-input-icon-right mt-2">
+        <i class="pi pi-envelope"></i>
+        <input type="text" placeholder="Email" formControlName="email" pInputText />
+      </span>
+    </span>
+    <span class="d-flex justify-content-center mt-2">
+      <p-password placeholder="Password" formControlName="password" [toggleMask]="true"></p-password>
+    </span>
+    <div class="d-flex justify-content-center mt-3">
+        <p-button class="mt-2" (click)="signUp()">Submit</p-button>  
+    </div>
+</form>
