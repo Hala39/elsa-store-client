@@ -1,3 +1,4 @@
+import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
@@ -8,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { OrderComponent } from './order/order.component';
 import { StepsModule } from 'primeng/steps';
 import { CardModule } from 'primeng/card';
+import { AccordionModule } from 'primeng/accordion';
 import { Routes, RouterModule } from '@angular/router';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { OrderCardComponent } from './order-card/order-card.component';
@@ -28,7 +30,9 @@ const routes : Routes = [
     StepsModule,
     CardModule,
     TabViewModule,
+    TableModule,
     InputTextModule,
+    AccordionModule,
     DropdownModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes)

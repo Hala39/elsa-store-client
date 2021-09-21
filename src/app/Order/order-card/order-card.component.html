@@ -19,15 +19,15 @@
         <br>
         First Line: {{order.address.firstLine}}
         <br>
-        Second Line: {{order.address.secondLine}}
+        Second Line: {{order.address.secondLine}} 
         <hr>
         <h6>Items</h6>
         <div *ngFor="let item of order.items">
             <div class="row">
-                <div class="col-4 col-md-4">
+                <div class="col-6 col-md-4">
                     <img [src]="item.pictureUrl" class="item-image" alt="">
                 </div>
-                <div class="col-8 col-md-6">
+                <div class="col-6 col-md-8">
                     <b>Name:</b> {{item.productName}}
                     <br>
                     <b>Color:</b> {{item.colorName}} 

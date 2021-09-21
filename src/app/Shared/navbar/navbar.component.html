@@ -50,7 +50,7 @@
   <div class="p-col-12 p-md-4 mb-2">
     <div class="p-inputgroup">
         <span class="p-inputgroup-addon search-addon"><i class="pi pi-search"></i></span>
-        <input type="text" class="form-control search-addon" pInputText placeholder="Search here ..">         
+        <input type="text" class="form-control search-addon" pInputText placeholder="Search here .." [(ngModel)]="searchString" (keyup.enter)="search(searchString)">         
     </div>
   </div>
   <div class="row">

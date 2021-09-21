@@ -142,5 +142,8 @@ export class OrderComponent implements OnInit {
       this.orderService.placeOrder(personalInfo, address, items);
     }
 
+    back() {
+      this.activeIndex--;
+    }
 }
 

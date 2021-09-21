@@ -19,6 +19,32 @@ export class ProductsComponent implements OnInit {
 
   productParams: ProductParams = new ProductParams();
 
+  constructor(private productService: ProductService) {}
+
+  ngOnInit() {
+    this.loadProducts();
+    this.initializeProducts();
+  }
+
+  initializeProducts() {
+    this.products$ = this.productService.products$;
+  }
+
+  loadProducts() {
+    this.productService.getProducts(this.productParams).subscribe(
+      res => this.pagination = res.pagination
+    );
+  }
+
+  resetParams() {
+    this.productParams = new ProductParams();
+  }
+
+  paginate(event: any) {
+    this.productParams.pageNumber = event.page;
+    this.loadProducts();
+  }
+
   items: MegaMenuItem[] = [
     {
       label: 'All Categories', icon: 'pi pi-fw pi-th-large',
@@ -31,7 +57,7 @@ export class ProductsComponent implements OnInit {
                     label: 'Winter',
                     command: (event: any) => {
                       this.resetParams();
-                      this.productParams.categoryId = 4;
+                      this.productParams.categoryId = 3;
                       this.loadProducts();
                     }
                   }, 
@@ -47,7 +73,7 @@ export class ProductsComponent implements OnInit {
                     label: 'Warm',
                     command: (event: any) => {
                       this.resetParams();
-                      this.productParams.categoryId = 3;
+                      this.productParams.categoryId = 4;
                       this.loadProducts();
                     }
                   }
@@ -174,33 +200,6 @@ export class ProductsComponent implements OnInit {
       }
     }
   ];
-
-  constructor(private productService: ProductService) {}
-
-  ngOnInit() {
-    this.loadProducts();
-    this.initializeProducts();
-  }
-
-  initializeProducts() {
-    this.products$ = this.productService.products$;
-  }
-
-  loadProducts() {
-    this.productService.getProducts(this.productParams).subscribe(
-      res => this.pagination = res.pagination
-    );
-  }
-
-  resetParams() {
-    this.productParams = new ProductParams();
-  }
-
-  paginate(event: any) {
-    this.productParams.pageNumber = event.page;
-    this.loadProducts();
-  }
-
 
 }
 

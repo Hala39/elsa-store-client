@@ -11,13 +11,13 @@
         </ng-template>
         <ng-template pTemplate="content" [formGroup]="personalInfoForm">
             <div class="row">
-                <div class="col-md-6 col-12">
+                <div class="col-md-6 col-12 mt-1">
                     <input formControlName="firstName"  type="text" required class="form-control" placeholder="First Name"
                     [ngClass]="{'warn': (firstName.invalid && submitted) || (firstName.touched && firstName.invalid)}"> 
                     <small *ngIf="(firstName.invalid && submitted) || (firstName.touched && firstName.invalid)" class="p-error">This field is required.</small>
                     <small *ngIf="(firstName.invalid && submitted) || (firstName.touched && firstName.hasError('pattern'))" class="p-error">Only letters are allowed.</small>
                 </div>
-                <div class="col-md-6 col-12">
+                <div class="col-md-6 col-12 mt-1">
                     <input formControlName="lastName" type="text" required class="form-control" placeholder="Last Name"
                     [ngClass]="{'warn': (lastName.invalid && submitted) || (lastName.touched && lastName.invalid)}"> 
                     <small class="p-error" *ngIf="(lastName.invalid && submitted )|| (lastName.touched && lastName.invalid)">This field is required.</small>
@@ -25,13 +25,13 @@
                 </div>
             </div>
             <div class="row mt-3">
-                <div class="col-md-6 col-12">
+                <div class="col-md-6 col-12 mt-1">
                     <input formControlName="contactEmail" type="text" required class="form-control" placeholder="Contact Email"
                     [ngClass]="{'warn': (contactEmail.invalid && submitted) || (contactEmail.touched && contactEmail.invalid)}"> 
                     <small class="p-error" *ngIf="(contactEmail.invalid && submitted )|| (contactEmail.touched && contactEmail.hasError('required'))">This filed is required.</small>
                     <small class="p-error" *ngIf="(contactEmail.invalid && contactEmail.touched && contactEmail.hasError('email'))">Please enter a valid email.</small>
                 </div>
-                <div class="col-md-6 col-12">
+                <div class="col-md-6 col-12 mt-1">
                     <input formControlName="contactPhone" type="text" required class="form-control" placeholder="Contact Phone"
                     [ngClass]="{'warn': (contactPhone.invalid && submitted) || (contactPhone.touched && contactPhone.invalid)}"> 
                     <small class="p-error" *ngIf="(contactPhone.invalid && submitted )|| (contactPhone.touched && contactPhone.invalid)">This field is required.</small>
@@ -77,13 +77,13 @@
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-6 col-md-6 pt-2">
+                    <div class="col-12 col-md-6 pt-2">
                         <input type="text" class="form-control" formControlName="firstLine" placeholder="Address - First Line">
                         <small *ngIf="(firstLine.invalid && submitted) || (firstLine.touched && firstLine.invalid)" class="p-error">
                             This field is required.
                         </small>
                     </div>
-                    <div class="col-6 col-md-6 pt-2">
+                    <div class="col-12 col-md-6 pt-2">
                         <input type="text" class="form-control" formControlName="secondLine" placeholder="Address - Second Line">
                         <small *ngIf="(secondLine.invalid && submitted) || (secondLine.touched && secondLine.invalid)" class="p-error">
                             This field is required.
@@ -93,7 +93,7 @@
             </ng-template>
             <ng-template pTemplate="footer">
                 <div class="p-grid p-nogutter p-justify-between">
-                    <p-button label="Back" icon="pi pi-angle-left"></p-button>
+                    <p-button label="Back" icon="pi pi-angle-left" (click)="back()"></p-button>
                     <p-button [disabled]="personalInfoForm.invalid" label="Next" icon="pi pi-angle-right" iconPos="right" (click)="changeIndex()"></p-button>
                 </div>
             </ng-template>
@@ -109,7 +109,7 @@
             </ng-template>
             <ng-template pTemplate="footer">
                 <div class="p-grid p-nogutter p-justify-between">
-                    <p-button label="Back" icon="pi pi-angle-left"></p-button>
+                    <p-button label="Back" icon="pi pi-angle-left" (click)="back()"></p-button>
                     <p-button [disabled]="personalInfoForm.invalid" label="Next" icon="pi pi-angle-right" iconPos="right" (click)="changeIndex()"></p-button>
                 </div>
             </ng-template>
@@ -124,48 +124,70 @@
             <ng-template pTemplate="subtitle">
                 Please re-check your info
             </ng-template>
-            <ng-template pTemplate="content">
-                <h6>Personal Info</h6>
-                Full Name: {{firstName.value}} {{lastName.value}}
-                <br>
-                Contact Email: {{contactEmail.value}}
-                <br>
-                Contact Phone: {{contactPhone.value}}
-                <hr>
-                <h6>Address</h6>
-                Region {{selectedDistrict.value.name}}, {{selectedGovernorate.value.name}} 
-                <br>
-                First Line: {{firstLine.value}}
-                <br>
-                Second Line: {{secondLine.value}}
-                <hr>
-                <h6 *ngIf="orderItems">Order</h6>
-                <div *ngFor="let item of orderItems">
-                    <div class="row">
-                        <div class="col-4 col-md-4">
-                            <img [src]="item.pictureUrl" class="item-image" alt="">
+            <p-accordion [multiple]="true">
+                <p-accordionTab header="Personal Information">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <strong>Full Name: </strong>
+                            <p>{{firstName.value}} {{lastName.value}}</p>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Email: </strong>
+                            <p>{{contactEmail.value}}</p>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Phone: </strong>
+                            <p>{{contactPhone.value}}</p>
+                        </li>
+                    </ul>
+                </p-accordionTab>
+                <p-accordionTab header="Address">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <strong>Region: </strong>
+                            <p>{{selectedDistrict.value.name}}, {{selectedGovernorate.value.name}}</p>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>First Line: </strong>
+                            <p>{{firstLine.value}}</p>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Second Line: </strong>
+                            <p>{{secondLine.value}}</p>
+                        </li>
+                    </ul>
+                </p-accordionTab>
+                <p-accordionTab header="Order Details">
+                    <div class="row" *ngFor="let item of orderItems">
+                        <div class="col-6 col-md-4">
+                            <img [src]="item.pictureUrl" class="item-image" alt="item.productName">
                         </div>
-                        <div class="col-8 col-md-6">
-                            <b>Name:</b> {{item.productName}}
-                            <br>
-                            <b>Color:</b> {{item.colorName}} 
-                            <br>
-                            <b>Size:</b> {{item.sizeName}}
-                            <br>
-                            <b>Quantity:</b> {{item.quantity}}
-                            <br>
-                            <b>Subtotal:</b> {{item.price * item.quantity | currency }}
+                        <div class="col-6 col-md-8">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <strong>Product: </strong>
+                                    <p>{{item.productName}}</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Options: </strong>
+                                    <p>{{item.quantity}} pieces, {{item.colorName}}, {{item.sizeName}}</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Subtotal: </strong>
+                                    <p>{{item.price * item.quantity | currency }}</p>
+                                </li>
+                            </ul>
                         </div>
+                        <hr>
+                    </div>  
+                    <div class="row d-flex justify-content-center mr-1">
+                        <h4 style="text-align: right;"><strong>Total:</strong> {{total | currency}}</h4>
                     </div>
-                    <hr>
-                    <div class="row pr-2">
-                        <b>Total:</b> {{ total | currency}}
-                    </div>
-                </div>
-            </ng-template>
+                </p-accordionTab>
+            </p-accordion>
             <ng-template pTemplate="footer">
                 <div class="p-grid p-nogutter p-justify-between">
-                    <p-button label="Back" icon="pi pi-angle-left"></p-button>
+                    <p-button label="Back" icon="pi pi-angle-left" (click)="back()"></p-button>
                     <p-button label="Complete" icon="pi pi-angle-right" iconPos="right" styleClass="p-button-success" (click)="placeOrder()"></p-button>
                 </div>
             </ng-template>
