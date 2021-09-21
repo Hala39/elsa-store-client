@@ -38,6 +38,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               break;
             case 401:
               this.messageService.add({severity: 'error', summary: 'Unauthorized', detail: error.error || 'Please login first!'});
+              this.accountService.logout();
               break;
             case 404:
               this.router.navigateByUrl('/not-found');

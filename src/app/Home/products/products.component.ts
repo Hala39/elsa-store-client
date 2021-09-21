@@ -55,7 +55,7 @@ export class ProductsComponent implements OnInit {
               items: [
                   {
                     label: 'Winter',
-                    command: (event: any) => {
+                    command: () => {
                       this.resetParams();
                       this.productParams.categoryId = 3;
                       this.loadProducts();
@@ -63,7 +63,7 @@ export class ProductsComponent implements OnInit {
                   }, 
                   {
                     label: 'Summer',
-                    command: (event: any) => {
+                    command: () => {
                       this.resetParams();
                       this.productParams.categoryId = 5;
                       this.loadProducts();
@@ -71,7 +71,7 @@ export class ProductsComponent implements OnInit {
                   }, 
                   {
                     label: 'Warm',
-                    command: (event: any) => {
+                    command: () => {
                       this.resetParams();
                       this.productParams.categoryId = 4;
                       this.loadProducts();
@@ -84,7 +84,7 @@ export class ProductsComponent implements OnInit {
               items: [
                 {
                   label: 'Barbies',
-                  command: (event: any) => {
+                  command: () => {
                     this.resetParams();
                     this.productParams.categoryId = 2;
                     this.loadProducts();
@@ -92,7 +92,7 @@ export class ProductsComponent implements OnInit {
                 },
                 {
                   label: 'Vehicles',
-                  command: (event: any) => {
+                  command: () => {
                     this.resetParams();
                     this.productParams.categoryId = 1;
                     this.loadProducts();
@@ -113,7 +113,7 @@ export class ProductsComponent implements OnInit {
                   items: [
                     {
                       label: '0 - 3 months',
-                    command: (event: any) => {
+                    command: () => {
                       this.resetParams();
                       this.productParams.sizeId = 1;
                       this.loadProducts();
@@ -121,7 +121,7 @@ export class ProductsComponent implements OnInit {
                   }, 
                       {
                         label: '3 - 6 months',
-                      command: (event: any) => {
+                      command: () => {
                         this.resetParams();
                         this.productParams.sizeId = 2;
                         this.loadProducts();
@@ -129,15 +129,15 @@ export class ProductsComponent implements OnInit {
                     }, 
                       {
                         label: '6 - 12 months',
-                        command: (event: any) => {
+                        command: () => {
                           this.resetParams();
                           this.productParams.sizeId = 3;
                           this.loadProducts();
                         }
                       }, 
                       {
-                        label: '1 years',
-                        command: (event: any) => {
+                        label: '1 year',
+                        command: () => {
                           this.resetParams();
                           this.productParams.sizeId = 4;
                           this.loadProducts();
@@ -145,7 +145,7 @@ export class ProductsComponent implements OnInit {
                       },
                       {
                         label: '2 years',
-                        command: (event: any) => {
+                        command: () => {
                           this.resetParams();
                           this.productParams.sizeId = 4;
                           this.loadProducts();
@@ -166,7 +166,7 @@ export class ProductsComponent implements OnInit {
                         {
                           label: 'High to low', 
                           icon: 'pi pi-fw pi-sort-amount-down-alt',
-                          command: (event: any) => {
+                          command: () => {
                             this.resetParams();
                             this.productParams.orderBy = 'price_desc';
                             this.loadProducts();
@@ -175,7 +175,7 @@ export class ProductsComponent implements OnInit {
                         {
                           label: 'Low to high', 
                           icon: 'pi pi-fw pi-sort-amount-up-alt',
-                          command: (event: any) => {
+                          command: () => {
                             this.resetParams();
                             this.productParams.orderBy = "price";
                             this.loadProducts();
@@ -187,14 +187,14 @@ export class ProductsComponent implements OnInit {
         ]
     },
     { 
-        label: 'New Arrivals', icon: 'pi pi-fw pi-star-o', command: (event: any) => {
+        label: 'New Arrivals', icon: 'pi pi-fw pi-star-o', command: () => {
           this.resetParams();
           this.productParams.orderBy = 'new';
           this.loadProducts();
         }
     },
     {
-      label: 'Reset Filters', icon: 'pi pi-fw pi-refresh', command: (event: any) => {
+      label: 'Reset Filters', icon: 'pi pi-fw pi-refresh', command: () => {
         this.resetParams();
         this.loadProducts();
       }

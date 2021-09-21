@@ -44,6 +44,7 @@ export class NavbarComponent implements OnInit {
       },
       {
         label: 'Shop',
+        visible: this.accountService.loggedIn,
         items: [
           {
             label: 'Cart',
@@ -57,7 +58,7 @@ export class NavbarComponent implements OnInit {
           },
           {
             label: 'Orders',
-            icon: 'pi pi-map',
+            icon: 'pi pi-briefcase',
             routerLink: '/order'
           }
         ]
@@ -68,19 +69,22 @@ export class NavbarComponent implements OnInit {
           {
             label: 'Login',
             icon: 'pi pi-user',
-            routerLink: '/account/login'
+            routerLink: '/account/login',
+            visible: !this.accountService.loggedIn
           },
           {
-              label: 'Register',
-              icon: 'pi pi-user-plus',
-              routerLink: '/account/register'
+            label: 'Register',
+            icon: 'pi pi-user-plus',
+            routerLink: '/account/register',
+            visible: !this.accountService.loggedIn
           },
           {
             label: 'LogOut',
             icon: 'pi pi-power-off',
             command: (event: any) => {
               this.accountService.logout();
-            }
+            },
+            visible: this.accountService.loggedIn
           }
         ]
       }

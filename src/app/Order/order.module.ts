@@ -10,13 +10,18 @@ import { OrderComponent } from './order/order.component';
 import { StepsModule } from 'primeng/steps';
 import { CardModule } from 'primeng/card';
 import { AccordionModule } from 'primeng/accordion';
+import { InplaceModule } from 'primeng/inplace';
+import {DividerModule} from 'primeng/divider';
 import { Routes, RouterModule } from '@angular/router';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { OrderCardComponent } from './order-card/order-card.component';
+import { PanelModule } from 'primeng/panel';
+import { MenuModule } from 'primeng/menu';
+import { CanActivateGuard } from '../Guards/can-activate.guard';
 
 const routes : Routes = [
-  { path: '', component: MyOrdersComponent },
-  { path: 'place', component: OrderComponent}
+  { path: '', component: MyOrdersComponent, canActivate: [CanActivateGuard] },
+  { path: 'place', component: OrderComponent, canActivate: [CanActivateGuard]}
 ]
 @NgModule({
   declarations: [
@@ -30,10 +35,13 @@ const routes : Routes = [
     StepsModule,
     CardModule,
     TabViewModule,
-    TableModule,
     InputTextModule,
+    InplaceModule,
     AccordionModule,
     DropdownModule,
+    PanelModule,
+    MenuModule,
+    DividerModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ]

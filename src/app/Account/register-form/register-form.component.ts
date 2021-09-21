@@ -13,6 +13,7 @@ import { AccountService } from 'src/app/Services/account.service';
 export class RegisterFormComponent implements OnInit {
 
   @Input() fullPage: boolean = false;
+  goBack: boolean = false;
   
   constructor(private fb: FormBuilder, private accountService: AccountService, 
     private messageService: MessageService, private router: Router) { }
@@ -66,7 +67,10 @@ export class RegisterFormComponent implements OnInit {
       name: this.name.value
     };
     if(this.signupForm.valid) {
-      this.accountService.signUp(this.appUser).subscribe();
+      if (this.fullPage) {
+        this.goBack = true;
+      } 
+      this.accountService.signUp(this.appUser, this.goBack).subscribe();
       if (this.accountService.loggedIn === true && this.fullPage === true) {
         this.router.navigateByUrl('/');
       }

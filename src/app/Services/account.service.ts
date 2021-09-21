@@ -25,27 +25,31 @@ export class AccountService {
     private location: Location,
     private basketService: BasketService) { }
 
-  logIn(appUser: AppUser) {
+  logIn(appUser: AppUser, goBack: boolean) {
     return this.apiCaller.post<UserInfo>(this.baseUrl + 'login', appUser).pipe(
       map(response => {
         if (response) {
           this.setUserToken(response.token);
           this.userIsLogged.next(true);
           this.messageService.add({severity:'success', summary:'Welcome back ' + response.name, detail: "Let's shop!"});
-          this.location.back();
+          if (goBack === true) {
+            this.location.back();
+          }
         }
       })
     )
   }
 
-  signUp(appUser: AppUser) {
+  signUp(appUser: AppUser, goBack: boolean) {
     return this.apiCaller.post<UserInfo>(this.baseUrl + 'register', appUser).pipe(
       map(response => {
         if (response) {
           this.setUserToken(response.token);
           this.userIsLogged.next(true);
           this.messageService.add({severity:'success', summary:'Welcome ' + response.name, detail: "Account created successfully!"});
-          this.location.back();
+          if (goBack === true) {
+            this.location.back();
+          }
         } 
       })
     );

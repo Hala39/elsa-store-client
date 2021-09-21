@@ -1,20 +1,28 @@
-<div class="container-fluid p-5" style="margin-bottom: 30%;">
-  <p-tabView [(activeIndex)]="activeIndex">
-    <p-tabPanel header="Pending">
-        <div *ngIf="pendingOrders.length > 0">
-            <app-order-card [orders]="pendingOrders" [pending]="true"></app-order-card>
-        </div>
-        <div *ngIf="pendingOrders.length === 0">
-          You do not have orders yet!
-        </div>
-    </p-tabPanel>
-    <p-tabPanel header="Recents">
-        <div *ngIf="recentOrders.length > 0">
-          <app-order-card [orders]="recentOrders"  [pending]="false"></app-order-card>
-        </div>
-        <div *ngIf="recentOrders.length === 0">
-          You do not have orders yet!
-        </div>
-    </p-tabPanel>
-</p-tabView>
+<div class="container-fluid my-3">
+    <p-tabView styleClass="tabview-custom" [(activeIndex)]="activeIndex">
+        <p-tabPanel>
+            <ng-template pTemplate = "header">
+                <i class="pi pi-calendar"></i>
+                <span class="p-m-l-1">PENDING</span>
+            </ng-template>
+            <div *ngIf="pendingOrders.length > 0">
+              <app-order-card [orders]="pendingOrders" [pending]="true"></app-order-card>
+          </div>
+          <div *ngIf="pendingOrders.length === 0" class="m-3">
+            <h6>Nothing to show.</h6>
+          </div> 
+        </p-tabPanel>
+        <p-tabPanel header="Header II">
+            <ng-template pTemplate = "header">
+                <i class="pi pi-check-square"></i>
+                <span class="p-m-l-1">RECENT</span>
+            </ng-template>
+            <div *ngIf="recentOrders.length > 0">
+              <app-order-card [orders]="recentOrders"  [pending]="false"></app-order-card>
+            </div>
+            <div *ngIf="recentOrders.length === 0" class="m-3">
+              <h6>Nothing to show.</h6>
+            </div>
+        </p-tabPanel>
+    </p-tabView>
 </div>

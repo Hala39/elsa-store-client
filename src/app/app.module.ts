@@ -1,3 +1,4 @@
+import { CanActivateGuard } from './Guards/can-activate.guard';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { CanLoadGuard } from './Guards/can-load.guard';
 import { CartModule } from './Cart/cart.module';
@@ -58,9 +59,9 @@ export function tokenGetter() {
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     CanLoadGuard,
+    CanActivateGuard,
     MessageService,
     ConfirmationService
-
   ],
   bootstrap: [AppComponent]
 })

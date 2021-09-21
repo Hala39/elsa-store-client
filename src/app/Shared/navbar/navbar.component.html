@@ -20,19 +20,28 @@
       <ul class="nav justify-content-end">
         <li class="nav-item">
           <a class="nav-link">
-            <button pButton pRipple type="button" icon="pi pi-user" class="p-button-rounded p-button-info p-button-text" (click)="op.toggle($event)"></button>
+            <button pButton pRipple type="button" icon="pi pi-user" class="p-button-rounded p-button-info p-button-text" 
+            (click)="op.toggle($event)"></button>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link">
-            <button pButton pRipple type="button" icon="pi pi-search" class="p-button-rounded p-button-success p-button-text"
+            <button pButton pRipple type="button" icon="pi pi-search" class="p-button-rounded p-button-help p-button-text"
             (click)="searchSidebar = true"></button>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link">
-            <button pButton pRipple type="button" icon="pi pi-shopping-cart" class="p-button-rounded  p-button-danger p-button-text" *ngIf="(isUserLoggedIn | async)"
+            <button pButton pRipple type="button" icon="pi pi-shopping-cart" class="p-button-rounded  p-button-danger p-button-text" 
+            *ngIf="(isUserLoggedIn | async)"
             [routerLink]="['/cart']"></button>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <button pButton pRipple type="button" icon="pi pi-briefcase" class="p-button-rounded  p-button-success p-button-text" 
+            *ngIf="(isUserLoggedIn | async)"
+            [routerLink]="['/order']"></button>
           </a>
         </li>
         <i class="pi pi-bars" style="font-size: 2rem" (click)="menuSidebar = true"></i>
@@ -45,7 +54,7 @@
     <input type="text" class="form-control search-sidebar" placeholder="Type here .." [(ngModel)]="searchString" (keyup.enter)="search(searchString)">
 </p-sidebar>
 
-<!-- menu -->
+<!-- side menu -->
 <p-sidebar  [dismissible]="true"  [closeOnEscape]="true" [(visible)]="menuSidebar" [fullScreen]="false" position="right" [baseZIndex]="10000"> 
   <div class="p-col-12 p-md-4 mb-2">
     <div class="p-inputgroup">

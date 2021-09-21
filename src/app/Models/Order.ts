@@ -7,6 +7,7 @@ export class Order {
     address: Address;
     items: OrderItem[];
     total: number;
+    orderedAt?: Date;
 }
 
 export class OrderItem {

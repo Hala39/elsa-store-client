@@ -1,11 +1,13 @@
 .item-image {
-    width: 150px;
-    height: 150px;
+    max-width: 90%;
+    max-height: 150px;
 }
 
-:host ::ng-deep {
-    .p-card {
-        box-shadow: none;
-        padding: 0%;
-    }
+ul, li {
+    border: none;
+}
+
+li, .list-group-item {
+    padding: 0px !important;
+    margin: 0% !important;
 }

@@ -17,6 +17,7 @@ export class LoginFormComponent implements OnInit {
     private messageService: MessageService, private router: Router) { }
 
   @Input() fullPage: boolean = false;
+  goBack: boolean = false;
 
   ngOnInit(): void {
     this.validate();
@@ -59,7 +60,10 @@ export class LoginFormComponent implements OnInit {
       password: this.password.value
     }
     if(this.loginForm.valid) {
-      this.accountService.logIn(this.appUser).subscribe();
+      if (this.fullPage) {
+        this.goBack = true;
+      } 
+      this.accountService.logIn(this.appUser, this.goBack).subscribe();
     } else {
       this.messageService.add({severity:'error', summary:'Attention!', detail: 'Invalid data!'});
     }

@@ -1,60 +1,80 @@
-<p-card>
-    <ng-template pTemplate="content" *ngIf="!pending">
-        <div class="p-grid p-nogutter p-justify-end">
-            <p-button label="Clear Recent Orders" styleClass="p-button-warning" (click)="clearRecentOrders()"></p-button>
-        </div>
-    </ng-template>
-</p-card>
-<p-card  *ngFor="let order of orders">
-    <ng-template pTemplate="content">
-        <h6>Personal Info</h6>
-        Full Name: {{order.personalInfo.firstName}} {{order.personalInfo.lastName}}
-        <br>
-        Contact Email: {{order.personalInfo.contactEmail}}
-        <br>
-        Contact Phone: {{order.personalInfo.contactPhone}}
+
+<div *ngIf="!pending">
+    <div class="p-grid p-nogutter p-justify-end mb-3">
+        <p-button label="Clear Recent Orders" icon="pi pi-trash" styleClass="p-button-warning" 
+        (click)="clearRecentOrders()"></p-button>
+    </div>
+</div>
+<div *ngFor="let order of orders">
+    <p-panel [toggleable]="true" [collapsed]="isFirstElement(order, orders)">
+        <ng-template pTemplate = "header">
+            <span>Ordered in {{order.orderedAt | date }}</span>
+        </ng-template>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <strong>Full Name: </strong>
+                <p>{{order.personalInfo.firstName}} {{order.personalInfo.lastName}}</p>
+            </li>
+            <li class="list-group-item">
+                <strong>Email: </strong>
+                <p>{{order.personalInfo.contactEmail}}</p>
+            </li>
+            <li class="list-group-item">
+                <strong>Phone: </strong>
+                <p>{{order.personalInfo.contactPhone}}</p>
+            </li>
+            <li class="list-group-item">
+                <strong>Region: </strong>
+                <p>{{order.address.district.name}}, {{order.address.governorate.name}}</p>
+            </li>
+            <li class="list-group-item">
+                <strong>First Line: </strong>
+                <p>{{order.address.firstLine}}</p>
+            </li>
+            <li class="list-group-item">
+                <strong>Second Line: </strong>
+                <p>{{order.address.secondLine}}</p>
+            </li>
+        </ul>
         <hr>
-        <h6>Address</h6>
-        Region {{order.address.district.name}}, {{order.address.governorate.name}} 
-        <br>
-        First Line: {{order.address.firstLine}}
-        <br>
-        Second Line: {{order.address.secondLine}} 
-        <hr>
-        <h6>Items</h6>
-        <div *ngFor="let item of order.items">
-            <div class="row">
-                <div class="col-6 col-md-4">
-                    <img [src]="item.pictureUrl" class="item-image" alt="">
+        <p-inplace>
+            <ng-template pTemplate="display">
+                <p-button label="View Order Items" icon="pi pi-chevron-circle-down" styleClass="p-button-info"></p-button>
+            </ng-template>
+            <ng-template pTemplate="content">
+                <div *ngFor="let item of order.items">
+                    <div class="row">
+                        <div class="col-6 col-md-2">
+                            <img [src]="item.pictureUrl" class="item-image" alt="item.productName">
+                        </div>
+                        <div class="col-6 col-md-10">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <strong>Product: </strong>
+                                    <p>{{item.productName}}</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Options: </strong>
+                                    <p>{{item.quantity}} pieces, {{item.colorName}}, {{item.sizeName}}</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Subtotal: </strong>
+                                    <p>{{item.price * item.quantity | currency }}</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                <p-divider layout="horizontal"></p-divider>
                 </div>
-                <div class="col-6 col-md-8">
-                    <b>Name:</b> {{item.productName}}
-                    <br>
-                    <b>Color:</b> {{item.colorName}} 
-                    <br>
-                    <b>Size:</b> {{item.sizeName}}
-                    <br>
-                    <b>Quantity:</b> {{item.quantity}}
-                    <br>
-                    <b>Price:</b> {{item.price}}
-                    <br>
-                    <b>Subtotal:</b> {{item.price * item.quantity | currency }}
-                    <br>
-                </div>
-            </div>
-            <hr>
+            </ng-template>
+        </p-inplace>
+        <div class="row d-flex justify-content-center mr-1">
+            <h5 style="text-align: right;"><strong>Total:</strong> {{order.total | currency}}</h5>
         </div>
-        <div class="row">
-            <div class="col-4 col-md-4"></div>
-            <div class="col-8 col-md-6">
-                <h6>Final Cost</h6>
-                <b>Total:</b> {{order.total | currency}}
+        <div *ngIf="pending">
+            <div class="p-grid p-nogutter p-justify-end mt-2">
+                <p-button label="Confirm Order" styleClass="p-button-warning" (click)="confirmOrder(order.id)"></p-button>
             </div>
         </div>
-    </ng-template>
-    <ng-template pTemplate="footer"  *ngIf="pending">
-        <div class="p-grid p-nogutter p-justify-end">
-            <p-button label="Confirm Order" styleClass="p-button-warning" (click)="confirmOrder(order.id)"></p-button>
-        </div>
-    </ng-template>
-</p-card>
+    </p-panel>
+</div>

@@ -1,3 +1,4 @@
+import { CanActivateGuard } from './../Guards/can-activate.guard';
 import { ToolbarModule } from 'primeng/toolbar';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -15,7 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 const routes : Routes = [
-  {path: '', component: CartComponent}
+  {path: '', component: CartComponent, canActivate: [CanActivateGuard]}
 ]
 
 @NgModule({
