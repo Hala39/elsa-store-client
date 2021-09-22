@@ -48,8 +48,27 @@ export class OrderComponent implements OnInit {
     return total;
   }
 
-  changeIndex() {
-    this.activeIndex++;
+  changeIndex(number: number) {
+    switch(number) {
+      case 1:
+        if (this.personalInfoForm.valid) {
+          this.activeIndex++;
+        } else {
+          this.messageService.add({severity: 'warn', summary: 'Invalid data!', detail: 'Please re-check your data!'});
+        }
+        break;
+      case 2:
+        if (this.addressForm.valid) {
+          this.activeIndex++;
+        } else {
+          this.messageService.add({severity: 'warn', summary: 'Invalid data!', detail: 'Please re-check your data!'});
+        }
+        break;
+      default:
+        this.activeIndex++;
+        break;
+    }
+
   }
 
     submitted: boolean = false;
@@ -59,8 +78,8 @@ export class OrderComponent implements OnInit {
     personalInfoForm: FormGroup;
     addressForm: FormGroup;
 
-    firstName = new FormControl('', [ Validators.required, Validators.pattern(/^[A-Za-z]+$/)]);
-    lastName = new FormControl('', [ Validators.required, Validators.pattern(/^[A-Za-z]+$/)]);
+    firstName = new FormControl('', [ Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]);
+    lastName = new FormControl('', [ Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]);
     contactPhone = new FormControl('', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.maxLength(8), Validators.minLength(8)]);
     contactEmail = new FormControl('', [Validators.required, Validators.email]);
     selectedGovernorate = new FormControl('', Validators.required);

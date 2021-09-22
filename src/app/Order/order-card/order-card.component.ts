@@ -1,5 +1,5 @@
 import { OrderItem } from './../../Models/Order';
-import { MenuItem, MessageService } from 'primeng/api';
+import { MenuItem, MessageService, ConfirmationService } from 'primeng/api';
 import { OrderService } from './../../Services/order.service';
 import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
@@ -15,7 +15,7 @@ export class OrderCardComponent implements OnInit {
   @Input() orders: Order[];
   @Input() pending: boolean;
 
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService, private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
   }
@@ -25,15 +25,25 @@ export class OrderCardComponent implements OnInit {
   }
 
   clearRecentOrders() {
-    this.orderService.clearRecentOrders().subscribe();
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to clear your recent orders list?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.orderService.clearRecentOrders().subscribe();
+      }
+    })
   }
 
-  isFirstElement(order: Order, orders: Order[]) : boolean {
-    if (orders[0] === order) {
-      return true;
-    }
-
-    return false;
+  deleteItem(order: Order) {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to remove this order?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.orderService.deleteRecentOrder(order.id).subscribe();
+      }
+    })
   }
 
 }

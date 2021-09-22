@@ -1,15 +1,19 @@
-
 <div *ngIf="!pending">
     <div class="p-grid p-nogutter p-justify-end mb-3">
-        <p-button label="Clear Recent Orders" icon="pi pi-trash" styleClass="p-button-warning" 
-        (click)="clearRecentOrders()"></p-button>
+        <a pRipple (click)="clearRecentOrders()" class="clearSpan">Clear all</a>
     </div>
 </div>
-<div *ngFor="let order of orders">
-    <p-panel [toggleable]="true" [collapsed]="isFirstElement(order, orders)">
+<div *ngFor="let order of orders" class="mb-2">
+    <p-panel [toggleable]="true" [collapsed]="true" [styleClass]="pending === true ? 'pending' : 'received'">
         <ng-template pTemplate = "header">
-            <span>Ordered in {{order.orderedAt | date }}</span>
+            <span *ngIf="pending"> Ordered in {{ order.orderedAt | date }} at {{ order.orderedAt | date: 'shortTime' }}</span>
+            <span *ngIf="!pending">Received in {{ order.receivedAt | date }} at {{ order.receivedAt | date: 'shortTime' }}</span>
         </ng-template>
+            <ng-template pTemplate= "icons">
+                <span pRipple *ngIf="!pending" pButton class="p-panel-header-icon p-link" (click)="deleteItem(order)">
+                    <span class="pi pi-trash"></span>
+                </span>
+            </ng-template>
         <ul class="list-group">
             <li class="list-group-item">
                 <strong>Full Name: </strong>
@@ -39,7 +43,9 @@
         <hr>
         <p-inplace>
             <ng-template pTemplate="display">
-                <p-button label="View Order Items" icon="pi pi-chevron-circle-down" styleClass="p-button-info"></p-button>
+                <div class="p-grid p-nogutter p-justify-end">
+                    <p-button pRipple label="View Order Items" icon="pi pi-chevron-circle-down" styleClass="p-button-info"></p-button>
+                </div>
             </ng-template>
             <ng-template pTemplate="content">
                 <div *ngFor="let item of order.items">
@@ -64,16 +70,16 @@
                             </ul>
                         </div>
                     </div>
-                <p-divider layout="horizontal"></p-divider>
+                    <p-divider layout="horizontal"></p-divider>
+                </div>
+                <div class="row d-flex justify-content-center mr-1 mt-1">
+                    <h6 style="text-align: right;"><strong>Total:</strong> {{order.total | currency}}</h6>
                 </div>
             </ng-template>
         </p-inplace>
-        <div class="row d-flex justify-content-center mr-1">
-            <h5 style="text-align: right;"><strong>Total:</strong> {{order.total | currency}}</h5>
-        </div>
         <div *ngIf="pending">
             <div class="p-grid p-nogutter p-justify-end mt-2">
-                <p-button label="Confirm Order" styleClass="p-button-warning" (click)="confirmOrder(order.id)"></p-button>
+                <p-button pRipple icon="pi pi-check-circle" label="Confirm order received" styleClass="p-button-warning" (click)="confirmOrder(order.id)"></p-button>
             </div>
         </div>
     </p-panel>

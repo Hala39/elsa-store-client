@@ -26,25 +26,23 @@
         </li>
         <li class="nav-item">
           <a class="nav-link">
-            <button pButton pRipple type="button" icon="pi pi-search" class="p-button-rounded p-button-help p-button-text"
+            <button pButton pRipple type="button" icon="pi pi-search" class="p-button-rounded p-button-warning p-button-text"
             (click)="searchSidebar = true"></button>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link">
             <button pButton pRipple type="button" icon="pi pi-shopping-cart" class="p-button-rounded  p-button-danger p-button-text" 
-            *ngIf="(isUserLoggedIn | async)"
-            [routerLink]="['/cart']"></button>
+            *ngIf="(isUserLoggedIn | async ) === true || getUserStatus() === true" [routerLink]="['/cart']"></button>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link">
             <button pButton pRipple type="button" icon="pi pi-briefcase" class="p-button-rounded  p-button-success p-button-text" 
-            *ngIf="(isUserLoggedIn | async)"
-            [routerLink]="['/order']"></button>
+            *ngIf="(isUserLoggedIn | async ) === true || getUserStatus() === true" [routerLink]="['/order']"></button>
           </a>
         </li>
-        <i class="pi pi-bars" style="font-size: 2rem" (click)="menuSidebar = true"></i>
+        <i class="pi pi-bars" style="font-size: 2rem" (click)="showSideMenu()"></i>
       </ul>
     </div>
 </nav>
@@ -55,10 +53,11 @@
 </p-sidebar>
 
 <!-- side menu -->
-<p-sidebar  [dismissible]="true"  [closeOnEscape]="true" [(visible)]="menuSidebar" [fullScreen]="false" position="right" [baseZIndex]="10000"> 
-  <div class="p-col-12 p-md-4 mb-2">
+<p-sidebar  [dismissible]="true" [closeOnEscape]="true" [(visible)]="menuSidebar" 
+[fullScreen]="false" position="right" [baseZIndex]="10000" [style]="{maxWidth:'90%'}"> 
+  <div class="p-col-12 p-md-12 mb-2">
     <div class="p-inputgroup">
-        <span class="p-inputgroup-addon search-addon"><i class="pi pi-search"></i></span>
+        <span class="p-inputgroup-addon search-addon"><i class="pi pi-search" (click)="search(searchString)" style="cursor: 'pointer';"></i></span>
         <input type="text" class="form-control search-addon" pInputText placeholder="Search here .." [(ngModel)]="searchString" (keyup.enter)="search(searchString)">         
     </div>
   </div>
@@ -78,6 +77,14 @@
       </p-tabPanel>
       <p-tabPanel header="LOGIN">
         <app-login-form></app-login-form>
+      </p-tabPanel>
+      <p-tabPanel header="SIGNOUT">
+        <div class="row d-flex justify-content-center p-5">
+          <h6 style="text-align: center;">
+          We will miss you!
+          </h6>
+          <p-button style="text-align: center;" pRipple icon="pi pi-sign-out" label="SIGNOUT" (click)="this.accountService.logout()"></p-button>
+        </div>
       </p-tabPanel>
     </p-tabView>
   </ng-template>

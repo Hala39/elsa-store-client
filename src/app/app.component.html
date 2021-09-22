@@ -1,4 +1,6 @@
 <app-navbar (searchEmitter)="search($event)"></app-navbar>
 <router-outlet></router-outlet>
 <p-scrollTop></p-scrollTop>
-<p-toast position="bottom-center"></p-toast>
+<p-toast position="center" [baseZIndex]="15000"></p-toast>
+<p-confirmDialog></p-confirmDialog>
+

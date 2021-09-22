@@ -1,3 +1,4 @@
+import { SharedModule } from './../Shared/shared.module';
 import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 import { DropdownModule } from 'primeng/dropdown';
@@ -40,6 +41,7 @@ const routes : Routes = [
     AccordionModule,
     DropdownModule,
     PanelModule,
+    SharedModule,
     MenuModule,
     DividerModule,
     ReactiveFormsModule,

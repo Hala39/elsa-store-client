@@ -1,3 +1,4 @@
+import { SharedModule } from './../Shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -22,6 +23,7 @@ const routes : Routes = [
     InputNumberModule,
     ToolbarModule,
     FormsModule,
+    SharedModule,
     RouterModule.forChild(routes)
   ]
 })

@@ -7,7 +7,50 @@ ul, li {
     border: none;
 }
 
-li, .list-group-item {
-    padding: 0px !important;
-    margin: 0% !important;
+.clearSpan {
+    color: #856404;
+    cursor: pointer;
+}
+
+:host ::ng-deep {
+    .received.p-panel .p-panel-header {
+        background: #d4edda;
+        border: solid #c3e6cb;
+        border-width: 0px;
+        color: #155724;
+    }
+
+    .pending.p-panel .p-panel-header {
+        background: #fff3cd;
+        border: solid #ffeeba;
+        border-width: 1px;
+        color: #856404;
+    }
+
+    .received.p-panel .p-panel-header .p-panel-header-icon {
+        color: #155724;
+    }
+
+    .pending.p-panel .p-panel-header .p-panel-header-icon {
+        color: #856404
+    }
+
+    .received.p-panel .p-panel-header .p-panel-header-icon:enabled:hover {
+        color: #155724;
+    }
+
+    .pending.p-panel .p-panel-header .p-panel-header-icon:enabled:hover {
+        color: #856404;
+    }
+
+    .received.p-panel .p-panel-header .p-panel-header-icon:focus {
+        box-shadow: 0 0 0 0.2rem #155724;
+    }
+
+    .pending.p-panel .p-panel-header .p-panel-header-icon:focus {
+        box-shadow: 0 0 0 0.2rem #856404;
+    }
+
+
+
 }

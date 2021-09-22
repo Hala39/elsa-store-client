@@ -81,13 +81,13 @@ export class ProductComponent implements OnInit {
 
   initializeDropdowns() {
     this.colors = [
-      { id: 0, name: "Select Color", inactive: true }
+      { id: 0, name: "Color", inactive: true }
     ]
 
     this.sizes = [
       {
         size: {
-          id: 0, name: "Select Size", inactive: true
+          id: 0, name: "Size", inactive: true
         },
         quantity: 20
       }

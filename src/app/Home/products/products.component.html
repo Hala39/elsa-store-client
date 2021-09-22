@@ -20,12 +20,13 @@
                                 <span class="product-category">{{product.category.name}}</span>
                             </div>
                         </div>
-                        <div class="product-grid-item-content">
+                        <div class="product-grid-item-content p-1">
                             <img [src]="product.mainImageUrl" [alt]="product.name" class="product-image">
                         </div>
                         <div class="product-grid-item-bottom">
                             <span class="product-price">{{product.price | currency }}</span>
-                            <p-button icon="pi pi-shopping-cart"
+                            <p-button icon="pi pi-shopping-cart" 
+                            pRipple
                             styleClass="p-button-sm p-button-help"
                             routerLink="/product/{{product.id}}">
                         </p-button>

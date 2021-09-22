@@ -48,7 +48,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               this.router.navigateByUrl('/server-error', navigationExtras);
               break;
             default:
-              this.messageService.add({severity: 'error', summary: error.status, detail: 'Something unexpected went wrong!'});
+              this.messageService.add({severity: 'error', summary: error.statusText, detail: 'Something unexpected went wrong!'});
               break;
           }
         }

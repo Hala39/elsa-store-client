@@ -106,6 +106,19 @@ export class OrderService {
     )
   }
 
+  deleteRecentOrder(id: number) {
+    return this.apiCaller.delete<boolean>(this.baseUrl + id.toString()).pipe(
+      map(
+        res => {
+          if (res === true) {
+            this.messageService.add({severity: 'success', summary: 'Success!', detail: 'Order is removed successfully'});
+            this.refreshPage();
+          }
+        }
+      )
+    )
+  }
+
   refreshPage() {
     var currentRoute: string = this.router.url;
     this.router.navigateByUrl('/', {skipLocationChange: true})

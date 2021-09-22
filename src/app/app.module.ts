@@ -1,3 +1,4 @@
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { CanActivateGuard } from './Guards/can-activate.guard';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { CanLoadGuard } from './Guards/can-load.guard';
@@ -41,6 +42,7 @@ export function tokenGetter() {
     CartModule,
     ToastModule,
     HttpClientModule,
+    ConfirmDialogModule,
     FormsModule,
     RouterModule,
     JwtModule.forRoot({

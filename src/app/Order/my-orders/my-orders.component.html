@@ -1,9 +1,8 @@
-<div class="container-fluid my-3">
+<div class="container-fluid my-4">
     <p-tabView styleClass="tabview-custom" [(activeIndex)]="activeIndex">
-        <p-tabPanel>
+        <p-tabPanel header="Header I">
             <ng-template pTemplate = "header">
-                <i class="pi pi-calendar"></i>
-                <span class="p-m-l-1">PENDING</span>
+                <h6 class="p-2 pending">PENDING</h6>
             </ng-template>
             <div *ngIf="pendingOrders.length > 0">
               <app-order-card [orders]="pendingOrders" [pending]="true"></app-order-card>
@@ -14,8 +13,7 @@
         </p-tabPanel>
         <p-tabPanel header="Header II">
             <ng-template pTemplate = "header">
-                <i class="pi pi-check-square"></i>
-                <span class="p-m-l-1">RECENT</span>
+                <h6 class="p-2 recent">RECENT</h6>
             </ng-template>
             <div *ngIf="recentOrders.length > 0">
               <app-order-card [orders]="recentOrders"  [pending]="false"></app-order-card>
@@ -26,3 +24,4 @@
         </p-tabPanel>
     </p-tabView>
 </div>
+<app-footer></app-footer>

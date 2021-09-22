@@ -1,3 +1,4 @@
+import { TitleCasePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -8,7 +9,8 @@ import { AccountService } from 'src/app/Services/account.service';
 @Component({
   selector: 'app-register-form',
   templateUrl: './register-form.component.html',
-  styleUrls: ['./register-form.component.scss']
+  styleUrls: ['./register-form.component.scss'],
+  providers: [TitleCasePipe]
 })
 export class RegisterFormComponent implements OnInit {
 
@@ -16,6 +18,7 @@ export class RegisterFormComponent implements OnInit {
   goBack: boolean = false;
   
   constructor(private fb: FormBuilder, private accountService: AccountService, 
+    public titleCasePipe: TitleCasePipe,
     private messageService: MessageService, private router: Router) { }
 
   ngOnInit(): void {
@@ -64,7 +67,7 @@ export class RegisterFormComponent implements OnInit {
     this.appUser = {
       email: this.email.value,
       password: this.password.value,
-      name: this.name.value
+      name: this.titleCasePipe.transform(this.name.value)
     };
     if(this.signupForm.valid) {
       if (this.fullPage) {

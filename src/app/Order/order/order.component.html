@@ -3,7 +3,7 @@
 
     <div *ngSwitchCase="PageNames.first">
     <p-card class="p-p-3">
-        <ng-template pTemplate="title">
+        <ng-template pTemplate="title" class="title">
             Personal Information
         </ng-template>
         <ng-template pTemplate="subtitle">
@@ -37,12 +37,13 @@
                     <small class="p-error" *ngIf="(contactPhone.invalid && submitted )|| (contactPhone.touched && contactPhone.invalid)">This field is required.</small>
                     <small class="p-error" *ngIf="(contactPhone.invalid && submitted )|| (contactPhone.touched && contactPhone.hasError('pattern'))">Only digits are allowed.</small>
                     <small class="p-error" *ngIf="(contactPhone.invalid && submitted )|| (contactPhone.touched && contactPhone.hasError('minlength' ))">Your phone number is 8 characters.</small>
+                    <small class="p-error" *ngIf="(contactPhone.invalid && submitted )|| (contactPhone.touched && contactPhone.hasError('maxlength' ))">Your phone number is 8 characters.</small>
                 </div>
             </div>
         </ng-template>
         <ng-template pTemplate="footer">
             <div class="p-grid p-nogutter p-justify-end">
-                <p-button [disabled]="personalInfoForm.invalid" label="Next" icon="pi pi-angle-right" iconPos="right" (click)="changeIndex()"></p-button>
+                <p-button pRipple [disabled]="!personalInfoForm.valid" label="Next" icon="pi pi-angle-right" iconPos="right" (click)="changeIndex(1)"></p-button>
             </div>
         </ng-template>
     </p-card>
@@ -50,7 +51,7 @@
 
     <div *ngSwitchCase="PageNames.second">
         <p-card class="p-p-3">
-            <ng-template pTemplate="title">
+            <ng-template pTemplate="title" class="title">
                 Delivery Address
             </ng-template>
             <ng-template pTemplate="subtitle">
@@ -93,8 +94,8 @@
             </ng-template>
             <ng-template pTemplate="footer">
                 <div class="p-grid p-nogutter p-justify-between">
-                    <p-button label="Back" icon="pi pi-angle-left" (click)="back()"></p-button>
-                    <p-button [disabled]="personalInfoForm.invalid" label="Next" icon="pi pi-angle-right" iconPos="right" (click)="changeIndex()"></p-button>
+                    <p-button pRipple label="Back" icon="pi pi-angle-left" (click)="back()"></p-button>
+                    <p-button pRipple [disabled]="!addressForm.valid" label="Next" icon="pi pi-angle-right" iconPos="right" (click)="changeIndex(2)"></p-button>
                 </div>
             </ng-template>
         </p-card>
@@ -102,15 +103,15 @@
 
     <div *ngSwitchCase="PageNames.third">
         <p-card class="p-p-3">
-            <ng-template pTemplate="content">
+            <ng-template pTemplate="content" class="title">
                 <h4 style="text-align: center;">Oups! This feature is not available right now!</h4>
                 <br>
                 <p  style="text-align: center;">Please proceed to the next step!</p>
             </ng-template>
             <ng-template pTemplate="footer">
                 <div class="p-grid p-nogutter p-justify-between">
-                    <p-button label="Back" icon="pi pi-angle-left" (click)="back()"></p-button>
-                    <p-button [disabled]="personalInfoForm.invalid" label="Next" icon="pi pi-angle-right" iconPos="right" (click)="changeIndex()"></p-button>
+                    <p-button pRipple label="Back" icon="pi pi-angle-left" (click)="back()"></p-button>
+                    <p-button pRipple label="Next" icon="pi pi-angle-right" iconPos="right" (click)="changeIndex(3)"></p-button>
                 </div>
             </ng-template>
         </p-card>
@@ -118,7 +119,7 @@
 
     <div *ngSwitchCase="PageNames.forth">
         <p-card>
-            <ng-template pTemplate="title">
+            <ng-template pTemplate="title" class="title">
                 Confirmation
             </ng-template>
             <ng-template pTemplate="subtitle">
@@ -159,10 +160,10 @@
                 </p-accordionTab>
                 <p-accordionTab header="Order Details">
                     <div class="row" *ngFor="let item of orderItems">
-                        <div class="col-6 col-md-4">
+                        <div class="col-6 col-md-2">
                             <img [src]="item.pictureUrl" class="item-image" alt="item.productName">
                         </div>
-                        <div class="col-6 col-md-8">
+                        <div class="col-6 col-md-10">
                             <ul class="list-group">
                                 <li class="list-group-item">
                                     <strong>Product: </strong>
@@ -187,10 +188,12 @@
             </p-accordion>
             <ng-template pTemplate="footer">
                 <div class="p-grid p-nogutter p-justify-between">
-                    <p-button label="Back" icon="pi pi-angle-left" (click)="back()"></p-button>
-                    <p-button label="Complete" icon="pi pi-angle-right" iconPos="right" styleClass="p-button-success" (click)="placeOrder()"></p-button>
+                    <p-button pRipple label="Back" icon="pi pi-angle-left" (click)="back()"></p-button>
+                    <p-button pRipple label="Complete" icon="pi pi-angle-right" iconPos="right" styleClass="p-button-success" (click)="placeOrder()"></p-button>
                 </div>
             </ng-template>
         </p-card>
     </div>
 </div>
+
+<app-footer></app-footer>

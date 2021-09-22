@@ -1,3 +1,4 @@
+import { MessageService } from 'primeng/api';
 import { ProductParams } from './../../Models/ProductParams';
 import { ProductService } from 'src/app/Services/product.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,7 +15,7 @@ export class CarouselComponent implements OnInit {
 	productParams: ProductParams = new ProductParams();
 	responsiveOptions: any;
 
-	constructor(private productService: ProductService) { 
+	constructor(private productService: ProductService, private messageService: MessageService) { 
 		this.responsiveOptions = [
       {
         breakpoint: '1024px',
@@ -44,6 +45,10 @@ export class CarouselComponent implements OnInit {
     this.productService.getProducts(this.productParams).subscribe(response => {
       this.products = response.result;
     })
+  }
+
+  favorite() {
+    this.messageService.add({severity: 'info', summary: 'This feature is not available at this moment!', detail: 'Do not worry! Will be added soon!', life: 5000});
   }
 
 }

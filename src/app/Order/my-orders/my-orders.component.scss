@@ -1,0 +1,18 @@
+:host ::ng-deep {
+    .p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
+        box-shadow: none;
+        color: transparent;
+    }
+
+}
+
+.pending {
+    color: #bb8e04;
+    font-weight: 700;
+
+}
+
+.recent {
+    color: #218c3a;
+    font-weight: 700;
+}

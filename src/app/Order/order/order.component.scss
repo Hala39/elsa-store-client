@@ -20,10 +20,16 @@
 }
 
 .item-image {
-    width: 100%;
-    height: fit-content;
+    max-width: 90%;
+    max-height: 150px;
 }
 
 ul, li {
     border: none;
+}
+
+@media screen and (max-width: 350px) {
+    .title {
+        display: none;
+    }
 }

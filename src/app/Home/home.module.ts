@@ -34,7 +34,6 @@ const routes : Routes = [
     PanelModule,
     DropdownModule,
     InputTextModule,
-    ButtonModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forChild(routes)

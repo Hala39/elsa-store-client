@@ -8,9 +8,9 @@
                         <img [src]="product.mainImageUrl" [alt]="product.name" class="product-image mt-2">
                         <h6 class="mt-2">${{product.price}}</h6>
                         <div class="car-buttons mt-1 hidden">
-                            <p-button type="button" class="m-1" styleClass="p-button-success p-button-rounded" icon="pi pi-shopping-cart"></p-button>
-                            <p-button type="button" class="m-1" styleClass="p-button-help p-button-rounded" icon="pi pi-eye" [style]="{color: 'white'}"></p-button>
-                            <p-button type="button" class="m-1" styleClass="p-button-danger p-button-rounded" icon="pi pi-heart"></p-button>
+                            <p-button (click)="favorite()" pRipple type="button" class="m-1" styleClass="p-button-success p-button-rounded" icon="pi pi-shopping-cart"></p-button>
+                            <p-button routerLink="/product/{{product.id}}" pRipple type="button" class="m-1" styleClass="p-button-help p-button-rounded" icon="pi pi-eye" [style]="{color: 'white'}"></p-button>
+                            <p-button routerLink="/product/{{product.id}}" pRipple type="button" class="m-1" styleClass="p-button-danger p-button-rounded" icon="pi pi-heart"></p-button>
                         </div>
                     </div>
                 </div>

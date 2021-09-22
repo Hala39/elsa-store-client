@@ -1,3 +1,4 @@
+import { SharedModule } from './../Shared/shared.module';
 import { CanActivateGuard } from './../Guards/can-activate.guard';
 import { ToolbarModule } from 'primeng/toolbar';
 import { RouterModule, Routes } from '@angular/router';
@@ -10,7 +11,6 @@ import {ButtonModule} from 'primeng/button';
 import {DropdownModule} from 'primeng/dropdown';
 import {InputTextModule} from 'primeng/inputtext';
 import {InputNumberModule} from 'primeng/inputnumber';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { CartComponent } from './cart.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -34,8 +34,8 @@ const routes : Routes = [
     InputTextModule,
     HttpClientModule,
     FormsModule,
+    SharedModule,
     InputNumberModule,
-    ConfirmDialogModule,
     RouterModule.forChild(routes)
   ],
   providers: [

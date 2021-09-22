@@ -4,7 +4,7 @@ import { AppUser } from './../Models/AppUser';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { map } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 import { UserInfo } from '../Models/UserInfo';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
@@ -17,8 +17,9 @@ import { Location } from '@angular/common'
 export class AccountService {
 
   baseUrl = environment.ApiUrl + 'account/';
-  userIsLogged = new BehaviorSubject<boolean>(this.loggedIn);
-  userIsLogged$ = this.userIsLogged.asObservable();
+
+  userLoggedSource = new BehaviorSubject<boolean>(null);
+  userLogged$ = this.userLoggedSource.asObservable();
 
   constructor(private apiCaller: HttpClient, private jwtHelper: JwtHelperService, 
     private router: Router, private messageService: MessageService,
@@ -29,8 +30,8 @@ export class AccountService {
     return this.apiCaller.post<UserInfo>(this.baseUrl + 'login', appUser).pipe(
       map(response => {
         if (response) {
+          this.userLoggedSource.next(true);
           this.setUserToken(response.token);
-          this.userIsLogged.next(true);
           this.messageService.add({severity:'success', summary:'Welcome back ' + response.name, detail: "Let's shop!"});
           if (goBack === true) {
             this.location.back();
@@ -44,8 +45,8 @@ export class AccountService {
     return this.apiCaller.post<UserInfo>(this.baseUrl + 'register', appUser).pipe(
       map(response => {
         if (response) {
+          this.userLoggedSource.next(true);
           this.setUserToken(response.token);
-          this.userIsLogged.next(true);
           this.messageService.add({severity:'success', summary:'Welcome ' + response.name, detail: "Account created successfully!"});
           if (goBack === true) {
             this.location.back();
@@ -60,6 +61,7 @@ export class AccountService {
     localStorage.setItem('expirationDate', JSON.stringify(this.jwtHelper.getTokenExpirationDate(token)));
     this.basketService.getBasket().subscribe();
     this.refreshPage();
+
   }
 
   public get loggedIn(): boolean{
@@ -68,7 +70,9 @@ export class AccountService {
 
   logout() {
     localStorage.clear();
-    this.router.navigateByUrl("/");
+    this.userLoggedSource.next(false);
+    this.refreshPage();
+    window.location.reload();
   }
   
   getExpiration() {

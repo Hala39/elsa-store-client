@@ -8,6 +8,7 @@ export class Order {
     items: OrderItem[];
     total: number;
     orderedAt?: Date;
+    receivedAt?: Date;
 }
 
 export class OrderItem {

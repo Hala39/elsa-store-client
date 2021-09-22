@@ -1,7 +1,6 @@
-<hr>
 <div class="container-fluid mt-4 px-5 py-5">
     <div class="row">
-        <div class="col-12 col-sm-4 mb-3">
+        <div class="d-flex justify-content-center col-12 col-sm-4 mb-3">
             <img [src]="product?.mainImageUrl" alt="product.name">
         </div>
         <div class="col-12 col-sm-8 pt-2 options">
@@ -24,7 +23,7 @@
                     <p-dropdown [options]="sizes" [(ngModel)]="selectedSize" optionLabel="size.name" optionValue="size.name" class="p-ml-3" (click)="selectSize(selectedSize)"
                     optionDisabled="inactive"></p-dropdown>
                     <p-inputNumber [(ngModel)]="quantity" [showButtons]="true" 
-                    inputId="minmax" inputId="minmax" mode="decimal" [min]="1" [max]="max" class="p-ml-3"></p-inputNumber>
+                    inputId="minmax" inputId="minmax" mode="decimal" [min]="1" [max]="max" class="quntity p-ml-3"></p-inputNumber>
                 </div>
             </div>
             <div class="row mt-4">
@@ -36,3 +35,5 @@
         </div>
     </div>
 </div>
+<app-footer></app-footer>
+
