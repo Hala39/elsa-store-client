@@ -55,7 +55,7 @@
 <!-- side menu -->
 <p-sidebar  [dismissible]="true" [closeOnEscape]="true" [(visible)]="menuSidebar" 
 [fullScreen]="false" position="right" [baseZIndex]="10000" [style]="{maxWidth:'90%'}"> 
-  <div class="p-col-12 p-md-12 mb-2">
+  <div class="p-col-11 p-md-12 mb-2">
     <div class="p-inputgroup">
         <span class="p-inputgroup-addon search-addon"><i class="pi pi-search" (click)="search(searchString)" style="cursor: 'pointer';"></i></span>
         <input type="text" class="form-control search-addon" pInputText placeholder="Search here .." [(ngModel)]="searchString" (keyup.enter)="search(searchString)">         

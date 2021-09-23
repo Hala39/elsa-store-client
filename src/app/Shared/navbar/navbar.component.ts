@@ -28,7 +28,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeItems();
-    this.getUserStatus();
+    this.loggedIn === true;
   }
 
   getUserStatus() : boolean {
@@ -68,15 +68,10 @@ export class NavbarComponent implements OnInit {
         items: [
           {
             label: 'Cart',
+            routerLink: '/cart',
             icon: 'pi pi-shopping-cart',
             command: () => {
-              if (this.loggedIn) {
-                this.router.navigateByUrl('/cart');
                 this.hideSideMenu();
-              }
-              else {
-                this.messageService.add({severity: 'warn', summary: 'Access denied!', detail: 'You should be registered and logged to your account first!'});
-              }
             }
           },
           {
@@ -89,14 +84,9 @@ export class NavbarComponent implements OnInit {
           {
             label: 'Orders',
             icon: 'pi pi-briefcase',
+            routerLink: '/order',
             command: () => {
-              if (this.loggedIn) {
-                this.router.navigateByUrl('/order');
-                this.hideSideMenu();
-              }
-              else {
-                this.messageService.add({severity: 'warn', summary: 'Access denied!', detail: 'You should be registered and logged to your account first!'});
-              }
+              this.hideSideMenu();
             }
           }
         ]
@@ -124,12 +114,8 @@ export class NavbarComponent implements OnInit {
             label: 'LogOut',
             icon: 'pi pi-power-off',
             command: (event: any) => {
-              if (this.loggedIn) {
                 this.accountService.logout();
-                this.hideSideMenu();
-              } else {
-                this.messageService.add({severity: 'warn', summary: 'Hey ..', detail: 'You are not logging in!'});
-              }
+              this.hideSideMenu();
             },
           }
         ]
