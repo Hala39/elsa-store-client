@@ -1,4 +1,4 @@
-<div *ngIf="(basket$ | async) as basket">
+<div *ngIf="(basket$ | async) as basket" class="mb-5">
     <div *ngIf="basket.length === 0">
         <div class="container-fluid">
             <hr>
@@ -72,4 +72,4 @@
         </div>
     </div>
 </div>
-<app-footer></app-footer>
+<app-footer class="mt-5"></app-footer>
