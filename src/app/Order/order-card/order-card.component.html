@@ -6,8 +6,8 @@
 <div *ngFor="let order of orders" class="mb-2">
     <p-panel [toggleable]="true" [collapsed]="true" [styleClass]="pending === true ? 'pending' : 'received'">
         <ng-template pTemplate = "header">
-            <span *ngIf="pending"> Ordered in {{ order.orderedAt | date }} at {{ order.orderedAt | date: 'shortTime' }}</span>
-            <span *ngIf="!pending">Received in {{ order.receivedAt | date }} at {{ order.receivedAt | date: 'shortTime' }}</span>
+            <span style="font-size: small;" *ngIf="pending"> Ordered in {{ order.orderedAt | date }}</span>
+            <span style="font-size: small;" *ngIf="!pending">Received in {{ order.receivedAt | date }}</span>
         </ng-template>
             <ng-template pTemplate= "icons">
                 <span pRipple *ngIf="!pending" pButton class="p-panel-header-icon p-link" (click)="deleteItem(order)">

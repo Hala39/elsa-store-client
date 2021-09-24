@@ -73,12 +73,9 @@ export class RegisterFormComponent implements OnInit {
       if (this.fullPage) {
         this.goBack = true;
       } 
-      this.accountService.signUp(this.appUser, this.goBack).subscribe();
-      if (this.accountService.loggedIn === true && this.fullPage === true) {
-        this.router.navigateByUrl('/');
-      }
+      this.accountService.signUp(this.appUser, this.goBack).subscribe(); 
     } else if (this.signupForm.get("password").hasError("pattern")) {
-      this.messageService.add({severity:'warn', summary:'Invalid password!', 
+      this.messageService.add({severity:'warn', summary:'Invalid password!', life: 6000,
       detail: 'Your password should contains at least 6 characters with at least one uppercase, one digital and one special character!'});
     }
   }

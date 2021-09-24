@@ -1,5 +1,4 @@
 import { MessageService } from 'primeng/api';
-import { BasketTotals } from './../Models/CustomerBasket';
 import { BasketItem } from 'src/app/Models/CustomerBasket';
 import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';

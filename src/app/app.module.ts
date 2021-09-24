@@ -6,10 +6,12 @@ import { CartModule } from './Cart/cart.module';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './Shared/shared.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+import { NgxSpinnerModule } from "ngx-spinner";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +24,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { ErrorInterceptor } from './Interceptors/error.interceptor';
 import { AuthInterceptor } from './Interceptors/auth.interceptor';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { BusyInterceptor } from './Interceptors/busy.interceptor';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -34,6 +37,7 @@ export function tokenGetter() {
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
+    NgxSpinnerModule,
     ScrollTopModule,
     AppRoutingModule,
     FontAwesomeModule,
@@ -48,7 +52,7 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["localhost:50001"]
+        allowedDomains: ["localhost:5001"]
       },
     }),
   ],
@@ -60,11 +64,13 @@ export function tokenGetter() {
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor, multi: true},
     CanLoadGuard,
     CanActivateGuard,
     MessageService,
     ConfirmationService
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
