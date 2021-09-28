@@ -14,7 +14,7 @@ export class CanLoadGuard implements CanLoad {
       if(this.accountService.loggedIn) {
         return true;
       }
-        this.router.navigateByUrl("/");
+        this.router.navigateByUrl("/account/login");
         return false;
   }
 }
