@@ -35,7 +35,7 @@ export class CartComponent implements OnInit {
   ngOnInit() {
     this.basketService.getLocalBasket();
     this.getBasket();
-
+    window.scrollTo(0,0);
   }
 
   getBasket() {

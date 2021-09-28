@@ -1,9 +1,10 @@
+import { BasketItem } from './../Models/CustomerBasket';
 import { MessageService } from 'primeng/api';
 import { BasketService } from './../Services/basket.service';
 import { ColorService } from './../Services/color.service';
 import { Component, OnInit } from '@angular/core';
 import { ProductColor } from '../Models/ProductColor';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../Models/Product';
 import { Color } from '../Models/Color';
 import { ColorSize } from '../Models/ColorSize';
@@ -23,7 +24,7 @@ export class ProductComponent implements OnInit {
   productId = +this.activatedRoute.snapshot.paramMap.get('id');
 
   constructor(private colorService: ColorService, private messageService: MessageService,
-    private activatedRoute: ActivatedRoute, private basketService: BasketService) {
+    private activatedRoute: ActivatedRoute, private basketService: BasketService, private router: Router) {
     this.loadProduct();
 
   }
@@ -39,6 +40,7 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
     this.initializeDropdowns();
+    window.scrollTo(0,0);
   }
 
   loadProduct() {
@@ -101,6 +103,19 @@ export class ProductComponent implements OnInit {
       this.messageService.add({severity: "warn", summary: 'Missing Information', detail: "Please choose a size!"});
     } else {
       return this.basketService.addItemToBasket(this.product, this.quantity, this.selectedSize, this.selectedColor, this.product.mainImageUrl);
+    }
+  }
+
+  buyItNow() {
+    if (this.selectColor === null) {
+      this.messageService.add({severity: "warn", summary: 'Missing Information', detail: "Please choose a color!"});
+    } else if ( this.selectedSize === null) {
+      this.messageService.add({severity: "warn", summary: 'Missing Information', detail: "Please choose a size!"});
+    } else {
+      const item = this.basketService.mapProductItemToBasketItem(this.product, this.quantity, this.selectedSize, this.selectedColor, this.product.mainImageUrl);
+      const items: BasketItem[] = [item];
+      this.basketService.orderItemsSource.next(items);
+      this.router.navigateByUrl("/order/place");
     }
   }
 

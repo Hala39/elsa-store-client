@@ -13,6 +13,9 @@
                 <span pRipple *ngIf="!pending" pButton class="p-panel-header-icon p-link" (click)="deleteItem(order)">
                     <span class="pi pi-trash"></span>
                 </span>
+                <span pRipple *ngIf="pending" pButton class="p-panel-header-icon p-link" (click)="confirmOrder(order.id)">
+                    <span class="pi pi-check-circle"></span>
+                </span>
             </ng-template>
         <ul class="list-group">
             <li class="list-group-item">
@@ -80,6 +83,11 @@
         <div *ngIf="pending">
             <div class="p-grid p-nogutter p-justify-end mt-2">
                 <p-button pRipple icon="pi pi-check-circle" label="Confirm order received" styleClass="p-button-warning" (click)="confirmOrder(order.id)"></p-button>
+            </div>
+        </div>
+        <div *ngIf="!pending">
+            <div class="p-grid p-nogutter p-justify-end mt-2">
+                <p-button pRipple icon="pi pi-trash" label="Remove" styleClass="p-button-error" (click)="deleteItem(order)"></p-button>
             </div>
         </div>
     </p-panel>

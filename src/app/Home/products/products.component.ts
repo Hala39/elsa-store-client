@@ -167,7 +167,6 @@ export class ProductsComponent implements OnInit {
                           label: 'High to low', 
                           icon: 'pi pi-fw pi-sort-amount-down-alt',
                           command: () => {
-                            this.resetParams();
                             this.productParams.orderBy = 'price_desc';
                             this.loadProducts();
                           }
@@ -176,7 +175,6 @@ export class ProductsComponent implements OnInit {
                           label: 'Low to high', 
                           icon: 'pi pi-fw pi-sort-amount-up-alt',
                           command: () => {
-                            this.resetParams();
                             this.productParams.orderBy = "price";
                             this.loadProducts();
                           }

@@ -169,7 +169,7 @@ export class BasketService {
     );
   }
 
-  private mapProductItemToBasketItem(item: Product, quantity: number, size: any, color: any, pictureUrl: string) : BasketItem {
+  mapProductItemToBasketItem(item: Product, quantity: number, size: any, color: any, pictureUrl: string) : BasketItem {
     return {
       id: item.id,
       productName: item.name,

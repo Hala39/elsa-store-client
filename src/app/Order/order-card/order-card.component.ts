@@ -21,7 +21,14 @@ export class OrderCardComponent implements OnInit {
   }
 
   confirmOrder(orderId: number) {
-    this.orderService.confirmOrderReceived(orderId).subscribe();
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to confirm receiving the order?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.orderService.confirmOrderReceived(orderId).subscribe();
+      }
+    })
   }
 
   clearRecentOrders() {

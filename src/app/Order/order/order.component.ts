@@ -41,6 +41,11 @@ export class OrderComponent implements OnInit {
     this.getItems();
     this.initializeItems();
     this.buildForm();
+    this.up();
+  }
+
+  up() {
+    window.scrollTo(0, 0);
   }
 
   getTotal(items: BasketItem[]) : number {
@@ -53,6 +58,7 @@ export class OrderComponent implements OnInit {
       case 1:
         if (this.personalInfoForm.valid) {
           this.activeIndex++;
+          this.up();
         } else {
           this.messageService.add({severity: 'warn', summary: 'Invalid data!', detail: 'Please re-check your data!'});
         }
@@ -60,12 +66,14 @@ export class OrderComponent implements OnInit {
       case 2:
         if (this.addressForm.valid) {
           this.activeIndex++;
+          this.up();
         } else {
           this.messageService.add({severity: 'warn', summary: 'Invalid data!', detail: 'Please re-check your data!'});
         }
         break;
       default:
         this.activeIndex++;
+        this.up();
         break;
     }
 
