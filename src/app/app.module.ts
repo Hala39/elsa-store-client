@@ -1,3 +1,4 @@
+import { OrderGuard } from './Guards/order.guard';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { CanActivateGuard } from './Guards/can-activate.guard';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -67,6 +68,7 @@ export function tokenGetter() {
     {provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor, multi: true},
     CanLoadGuard,
     CanActivateGuard,
+    OrderGuard,
     MessageService,
     ConfirmationService
   ],

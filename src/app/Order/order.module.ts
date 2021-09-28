@@ -1,3 +1,4 @@
+import { OrderGuard } from './../Guards/order.guard';
 import { SharedModule } from './../Shared/shared.module';
 import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
@@ -22,7 +23,7 @@ import { CanActivateGuard } from '../Guards/can-activate.guard';
 
 const routes : Routes = [
   { path: '', component: MyOrdersComponent, canActivate: [CanActivateGuard] },
-  { path: 'place', component: OrderComponent, canActivate: [CanActivateGuard]}
+  { path: 'place', component: OrderComponent, canActivate: [CanActivateGuard, OrderGuard]}
 ]
 @NgModule({
   declarations: [

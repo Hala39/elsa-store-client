@@ -1,3 +1,5 @@
+import { CanActivateGuard } from './Guards/can-activate.guard';
+import { OrderGuard } from './Guards/order.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './Home/home.component';
 import { NgModule } from '@angular/core';
@@ -16,7 +18,7 @@ const routes: Routes = [
   {
     path: 'order', loadChildren: () => import('../app/Order/order.module')
       .then(m => m.OrderModule),
-      canLoad: [CanLoadGuard],
+      canLoad: [CanLoadGuard]
   },
   { path: 'account', loadChildren: () => import('../app/Account/account.module')
       .then(m => m.AccountModule)
