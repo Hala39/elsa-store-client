@@ -67,8 +67,8 @@ export class ProductComponent implements OnInit {
   selectColor(color: any) {
     const selected = this.productColors.find(pc => pc.color.name === color);
     if (selected) {
-      this.sizes = this.sizes.concat(selected.sizeOptions);
       this.product.mainImageUrl = selected.url;
+      this.sizes = this.sizes.concat(selected.sizeOptions);
       this.max = selected.quantity;
     }
   }
